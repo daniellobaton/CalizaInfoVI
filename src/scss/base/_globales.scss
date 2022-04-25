@@ -1,0 +1,13 @@
+@use 'variables' as v;
+/* El siguiente código nos facilita el uso del CSS
+Box Model */
+html { box-sizing: border-box; }
+*, *:before, *:after { box-sizing: inherit; }
+/* Si creamos un contenedor de 450px de alto y le añadimos 20px de padding,
+ dicho contenedor se quedará de 450px, en vez de 490px */
+
+ 
+/* El siguiente código nos permite manejar fácilmente 
+las unidades de medida: 1rem = 10px */
+html{ font-size: 62.5%; }
+body{ font-size: 16px; }    
