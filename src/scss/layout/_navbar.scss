@@ -1,4 +1,6 @@
-.navbar{
+@use 'base/variables' as v;
+
+.tf2{
     
-    font-size: 2rem;
+    font-size: v.$f2;
 }
