@@ -1,5 +1,9 @@
 env/*
 package-lock.json
 node_modules/
+<<<<<<< HEAD
 src/img/*
 db.sqlite3
+=======
+src/img/*
+>>>>>>> 4399150 (prueba 2)
