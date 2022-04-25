@@ -1,0 +1,5 @@
+env/
+package-lock.json
+node_modules/
+static/css/normalize.css
+src/img/*
