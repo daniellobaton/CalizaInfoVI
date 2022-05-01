@@ -1,5 +1,38 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
-    <h3>Store</h3>
+    <div class="row">
+        <div class="col-lg-4">
+            <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
+            <div class="box-element product">
+                <h6><strong>Product</strong></h6>
+                <hr>
+                <button class="btn btn-outline-secondary add-btn">Add to cart</button>
+                <a class="btn btn-outline-success" href="#">Ver</a>
+                <h4 class="precio">$27</h4>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
+            <div class="box-element product">
+                <h6><strong>Product</strong></h6>
+                <hr>
+                <button class="btn btn-outline-secondary add-btn">Add to cart</button>
+                <a class="btn btn-outline-success" href="#">Ver</a>
+                <h4 class="precio">$27</h4>
+            </div>
+        </div>
+
+        <div class="col-lg-4">
+            <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
+            <div class="box-element product">
+                <h6><strong>Product</strong></h6>
+                <hr>
+                <button class="btn btn-outline-secondary add-btn">Add to cart</button>
+                <a class="btn btn-outline-success" href="#">Ver</a>
+                <h4 class="precio">$27</h4>
+            </div>
+        </div>
+    </div>
 {% endblock content %}

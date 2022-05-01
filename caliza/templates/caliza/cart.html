@@ -1,5 +1,54 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
-    <h3>Cart</h3>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continuar comprando</a>
+
+                <br>
+                <br>
+
+                <table class="table">
+                    <tr>
+                        <th><h5>Items: <strong>3</strong></h5></th>
+                        <th><h5>Total: <strong>$43</strong></h5></th>
+                        <th>
+                            <a class="btn btn-success btn-carrito-pagar" href="{% url 'checkout' %}">
+                                Checkout
+                            </a>
+                        </th>
+                    </tr>
+                </table>
+            </div>
+
+            <br>
+
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2;"></div>
+                    <div style="flex:2;"><strong>Item</strong></div>
+                    <div style="flex:1;"><strong>Price</strong></div>
+                    <div style="flex:1;"><strong>Quantity</strong></div>
+                    <div style="flex:1;"><strong>Total</strong></div>
+                </div>
+
+                <div class="cart-row">
+                    <div style="flex:2;">
+                            <img class="row-image" src="{% static 'img/placeholder.webp' %}" alt="">
+                    </div>
+                    <div style="flex:2;">Product 1</div>
+                    <div style="flex:1;">$20</div>
+                    <div style="flex:1;">
+                        <p class="quantity">2</p>
+                        <div class="quantity">
+                            <img src="{% static 'img/arrow-up.webp' %}" class="chg-quantity" alt="Flecha arriba">
+                            <img src="{% static 'img/arrow-down.webp' %}" class="chg-quantity" alt="Flecha abajo">
+                        </div>
+                    </div>
+                    <div style="flex:1;">$40</div>
+                </div>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
