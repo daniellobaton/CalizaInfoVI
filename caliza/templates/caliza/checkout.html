@@ -54,15 +54,16 @@
                 <h3>Resumen de compra</h3>
 
                 <hr>
-
+                {% for item in items %}
                 <div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{% static 'img/placeholder.webp' %}"></div>
-					<div style="flex:2"><p>Producto 1</p></div>
-					<div style="flex:1"><p>$20.00</p></div>
-					<div style="flex:1"><p>x2</p></div>
+					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+					<div style="flex:2"><p>{{item.product.name}}</p></div>
+					<div style="flex:1"><p>{{item.product.price}}</p></div>
+					<div style="flex:1"><p>{{item.quantity}}</p></div>
 				</div>
-				<h5>Productos:   2</h5>
-				<h5>Total:   $48</h5>
+                {% endfor %}
+				<h5>Productos:   {{order.getCartItems}}</h5>
+				<h5>Total:   {{order.getCartTotal|floatformat:2}}</h5>
 
             </div>
         </div>
