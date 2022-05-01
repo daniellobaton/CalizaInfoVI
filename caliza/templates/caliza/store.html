@@ -2,37 +2,17 @@
 {% load static %}
 {% block content %}
     <div class="row">
+        {% for product in products %}
         <div class="col-lg-4">
             <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
             <div class="box-element product">
-                <h6><strong>Producto</strong></h6>
+                <h6><strong>{{product.name}}</strong></h6>
                 <hr>
                 <button class="btn btn-outline-secondary add-btn">Añadir al carrito</button>
                 <a class="btn btn-outline-success" href="#">Ver</a>
-                <h4 class="precio">$27</h4>
+                <h4 class="precio">${{product.price|floatformat:2}}</h4>
             </div>
         </div>
-
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
-            <div class="box-element product">
-                <h6><strong>Producto</strong></h6>
-                <hr>
-                <button class="btn btn-outline-secondary add-btn">Añadir al carrito</button>
-                <a class="btn btn-outline-success" href="#">Ver</a>
-                <h4 class="precio">$27</h4>
-            </div>
-        </div>
-
-        <div class="col-lg-4">
-            <img class="thumbnail" src="{% static 'img/placeholder.webp' %}" alt="Placeholder">
-            <div class="box-element product">
-                <h6><strong>Producto</strong></h6>
-                <hr>
-                <button class="btn btn-outline-secondary add-btn">Añadir al carrito</button>
-                <a class="btn btn-outline-success" href="#">Ver</a>
-                <h4 class="precio">$27</h4>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 {% endblock content %}
