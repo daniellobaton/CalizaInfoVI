@@ -13,7 +13,7 @@ def store(request):
         cartItems = order.getCartItems
     else:
         items = []
-        order = {'getCartTotal': 0, 'getCartItems': 0}
+        order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
         cartItems = order['getCartItems']
 
     products = Product.objects.all()
@@ -28,7 +28,7 @@ def cart(request):
         cartItems = order.getCartItems
     else:
         items = []
-        order = {'getCartTotal': 0, 'getCartItems': 0}
+        order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
         cartItems = order['getCartItems']
 
 
@@ -44,10 +44,10 @@ def checkout(request):
 
     else:
         items = []
-        order = {'getCartTotal': 0, 'getCartItems': 0, 'cartItems': cartItems}
+        order = {'getCartTotal': 0, 'getCartItems': 0, 'cartItems': cartItems, 'shipping': False}
         cartItems = order['getCartItems']
 
-    context = {'items': items, 'order': order}
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/checkout.html', context)
 
 def updateItem(request):
@@ -75,3 +75,6 @@ def updateItem(request):
         orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
+
+def processOrder():
+    return JsonResponse('Payment complete', safe=False)
