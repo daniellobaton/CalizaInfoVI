@@ -42,8 +42,8 @@
                     <div style="flex:1;">
                         <p class="quantity">{{item.quantity}}</p>
                         <div class="quantity">
-                            <img src="{% static 'img/arrow-up.webp' %}" class="chg-quantity" alt="Flecha arriba">
-                            <img src="{% static 'img/arrow-down.webp' %}" class="chg-quantity" alt="Flecha abajo">
+                            <img data-product={{item.product.id}} data-action="add" src="{% static 'img/arrow-up.webp' %}" class="chg-quantity update-cart" alt="Flecha arriba">
+                            <img data-product={{item.product.id}} data-action="remove" src="{% static 'img/arrow-down.webp' %}" class="chg-quantity update-cart" alt="Flecha abajo">
                         </div>
                     </div>
                     <div style="flex:1;">${{item.getTotal}}</div>
