@@ -1,8 +1,10 @@
 from cmath import log
+import re
 from django.shortcuts import render
 from django.http import JsonResponse
-from .models import *
 import json
+import datetime
+from .models import *
 
 # Create your views here.
 def store(request):
@@ -44,7 +46,7 @@ def checkout(request):
 
     else:
         items = []
-        order = {'getCartTotal': 0, 'getCartItems': 0, 'cartItems': cartItems, 'shipping': False}
+        order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
         cartItems = order['getCartItems']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
@@ -55,9 +57,9 @@ def updateItem(request):
     productId = data['productId']
     action = data['action']
 
-    print('Product id: ', productId)
     print('Action: ', action)
-
+    print('Product id: ', productId)
+    
     customer = request.user.customer
     product = Product.objects.get(id = productId)
     order, created = Order.objects.get_or_create(customer = customer, complete = False)
@@ -76,5 +78,32 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
-def processOrder():
+def processOrder(request):
+    transactionId = datetime.datetime.now().timestamp()
+    data = json.loads(request.body)
+
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        total = float(data['form']['total'])
+        order.transactionId = transactionId
+
+        if total == order.getCartTotal:
+            order.complete = True
+        order.save()
+        
+        if order.shipping == True:
+            ShippingAddress.objects.create(
+
+                customer = customer,
+                order = order,
+                address = data['shipping']['address'],
+                city = data['shipping']['city'],
+                state = data['shipping']['state'],
+                zipCode = data['shipping']['zipcode'],
+            )
+
+    else:
+        print('User is not logged in')
+
     return JsonResponse('Payment complete', safe=False)
