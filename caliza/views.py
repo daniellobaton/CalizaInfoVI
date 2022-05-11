@@ -1,4 +1,5 @@
 from cmath import log
+from math import prod
 import re
 from django.shortcuts import render
 from django.http import JsonResponse
@@ -29,10 +30,37 @@ def cart(request):
         items = order.orderitem_set.all()
         cartItems = order.getCartItems
     else:
+        try:
+            cart = json.loads(request.COOKIES['cart'])
+        except:
+            cart = {}
+        print('Cart: ', cart)
         items = []
         order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
         cartItems = order['getCartItems']
 
+        for i in cart:
+            cartItems += cart[i]["quantity"]
+
+            product = Product.objects.get(id=i)
+            total = (product.price * cart[i]['quantity'])
+
+            order['getCartTotal'] += total
+            order['getCartItems'] += cart[i]['quantity']
+
+
+            item = {
+                'product':{
+                    'id': product.id,
+                    'name': product.name,
+                    'price': product.price,
+                    'imageURL': product.imageURL,
+                },
+                'quantity': cart[i]['quantity'],
+                'getTotal': total
+            }
+
+            items.append(item)
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/cart.html', context)
