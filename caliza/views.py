@@ -24,7 +24,6 @@ def cart(request):
     return render(request, 'caliza/cart.html', context)
 
 def checkout(request):
-    
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
@@ -59,6 +58,8 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+#from django.views.decorators.csrf import csrf_exempt
+#@csrf_exempt
 def processOrder(request):
     transactionId = datetime.datetime.now().timestamp()
     data = json.loads(request.body)
