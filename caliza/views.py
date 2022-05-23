@@ -32,6 +32,15 @@ def checkout(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/checkout.html', context)
 
+def ourProducts(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'caliza/ourProducts.html', context)
+
 def updateItem(request):
     data = json.loads(request.body)
     productId = data['productId']
