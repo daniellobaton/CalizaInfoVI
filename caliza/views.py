@@ -57,7 +57,16 @@ def promos(request):
     items = data['items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
-    return render(request, 'caliza/promos.html', context)   
+    return render(request, 'caliza/promos.html', context)  
+
+def masVendidos(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'caliza/masVendidos.html', context) 
 
 def updateItem(request):
     data = json.loads(request.body)
