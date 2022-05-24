@@ -125,3 +125,10 @@ h1, h2, h3, h4, h5, h6 {
   float: right;
   margin: 0 0.5rem;
 }
+
+.link-secciones {
+  text-decoration: none;
+  color: #2C2C54;
+  font-weight: 600;
+  font-size: 1.2rem;
+}
