@@ -40,6 +40,24 @@ def ourProducts(request):
 
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/ourProducts.html', context)
+    
+def individual(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'caliza/individualProduct.html', context)    
+
+def promos(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    return render(request, 'caliza/promos.html', context)   
 
 def updateItem(request):
     data = json.loads(request.body)

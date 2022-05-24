@@ -4,3 +4,5 @@ node_modules/
 src/img/*
 db.sqlite3
 imgWebP/*
+
+**/__pycache__/
