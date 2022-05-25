@@ -8,8 +8,11 @@
             <div class="box-element product">
                 <h6><strong>{{product.name}}</strong></h6>
                 <hr>
-                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</button>
-                <a class="btn btn-outline-success" href="#">Ver</a>
+                <form action="{% url 'individual_product' %}" method="get">
+                    <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</button>
+                    <button class="btn btn-outline-success" type="submit">Ver</button>
+                </form>
+                
                 <h4 class="precio">${{product.price|floatformat:2}}</h4>
             </div>
         </div>

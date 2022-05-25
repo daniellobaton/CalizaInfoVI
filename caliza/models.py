@@ -15,6 +15,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits = 7, decimal_places = 2)
     digital = models.BooleanField(default = False, null = True, blank = False)
     image = models.ImageField(null = True, blank = True)
+    totalSell = models.IntegerField()
 
     def __str__(self):
         return self.name
