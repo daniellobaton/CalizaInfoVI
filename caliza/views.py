@@ -5,6 +5,9 @@ import datetime
 from .models import *
 from . utils import cookieCart, cartData, guestOrder
 
+# Import pagination stuff
+from django.core.paginator import Paginator
+
 # Create your views here.
 def store(request):
     data = cartData(request)
@@ -35,10 +38,15 @@ def checkout(request):
 def ourProducts(request):
     data = cartData(request)
     cartItems = data['cartItems']
-    order = data['order']
-    items = data['items']
-
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    productsList = Product.objects.all()
+    
+    # Set up pagination
+    pagination = Paginator(Product.objects.all(), 9)
+    page = request.GET.get('page')
+    products = pagination.get_page(page)
+    nums = "a" * products.paginator.num_pages
+    
+    context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems}
     return render(request, 'caliza/ourProducts.html', context)
     
 def individual(request):
