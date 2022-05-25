@@ -132,3 +132,12 @@ h1, h2, h3, h4, h5, h6 {
   font-weight: 600;
   font-size: 1.2rem;
 }
+
+.image-perfil {
+  border-radius: 50% 50%;
+  width: 5rem;
+}
+
+.justify {
+  text-align: justify;
+}

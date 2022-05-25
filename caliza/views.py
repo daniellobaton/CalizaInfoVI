@@ -49,7 +49,7 @@ def ourProducts(request):
     context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems}
     return render(request, 'caliza/ourProducts.html', context)
     
-def individual(request):
+def individualProduct(request):
     data = cartData(request)
     cartItems = data['cartItems']
     order = data['order']
