@@ -36,6 +36,9 @@ def wishList(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': products}
     return render(request, 'caliza/wishList.html', context)
 
+def login(request):
+    return render(request, 'caliza/login.html')
+
 def checkout(request):
     data = cartData(request)
     cartItems = data['cartItems']
