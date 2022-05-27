@@ -39,6 +39,9 @@ def wishList(request):
 def login(request):
     return render(request, 'caliza/login.html')
 
+def signIn(request):
+    return render(request, 'caliza/signIn.html')
+
 def checkout(request):
     data = cartData(request)
     cartItems = data['cartItems']
