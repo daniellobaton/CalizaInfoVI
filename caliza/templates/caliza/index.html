@@ -103,7 +103,9 @@
         
         <div class="form-inline my-2 my-lg-0">
           <a href="#"class="btn btn-warning">Iniciar sesión</a>
-          <i id="cart-icon" class="fas fa-heart"></i>
+          <a href="{% url 'wishList' %}">
+            <img  id="cart-icon" src="{% static 'img/like.webp' %}">
+          </a>
           <a href="{% url 'cart' %}">
            <img  id="cart-icon" src="{% static 'img/cart.webp' %}">
           </a>

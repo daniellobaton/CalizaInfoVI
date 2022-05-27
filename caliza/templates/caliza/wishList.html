@@ -1,0 +1,43 @@
+{% extends 'caliza/index.html' %}
+{% load static %}
+{% block content %}
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-element">
+                <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Continuar comprando</a>
+            </div>
+
+            <br>
+
+            <div class="box-element">
+                <div class="cart-row">
+                    <div style="flex:2;"><strong>Imagen</strong></div>
+                    <div style="flex:2;"><strong>Producto</strong></div>
+                    <div style="flex:2;"><strong>Precio</strong></div>
+                    <div style="flex:2;"><strong>Añadir al carrito</strong></div>
+                    <div style="flex:1;"><strong>Borrar</strong></div>
+                </div>
+                {% for item in items %}
+                <div class="cart-row">
+                    <div style="flex:2;">
+                        <img class="row-image" src="{{item.product.imageURL}}" alt="">
+                    </div>
+                    <div style="flex:2;">{{item.product.name}}</div>
+                    <div style="flex:2;">${{item.product.price|floatformat:2}}</div>
+                    <div style="flex:2;">
+                        <a href="#" data-product={{product.id}} data-action="add" class="add-btn update-cart">
+                            <img id="cart-icon" src="{% static 'img/shopping-cart.webp' %}">
+                        </a>
+                    </div>
+                    <div style="flex:1;">
+                        <a href="#">
+                            <img id="cart-icon" src="{% static 'img/delete.webp' %}">
+                        </a>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+{% endblock content %}
