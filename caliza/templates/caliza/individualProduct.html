@@ -1,12 +1,18 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
-    <div class="row">
-        <div class="col">
-            <img src="../../../static/img/product-6.webp" class="img-fluid mx-auto d-block">
+    <div class="row mb-5">
+        <div class="col-2">
+            <a class="btn btn-outline-dark" href="{% url 'store' %}">&#x2190; Regresar</a>
+
+            <br>
+            <br>
         </div>
         <div class="col">
-            <h4>Limpieza</h4>
+            <img src="{{producto.imageURL}}" class="img-fluid mx-auto d-block">
+        </div>
+        <div class="col">
+            <h4>{{producto.name}}</h4>
             <div class="d-flex justify-content-between">
                 <div>
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -27,51 +33,30 @@
                 </div>
                 <div>
                     <i id="cart-icon" class="fas fa-heart"></i>
-                    <a href="{% url 'cart' %}">
-                    <img  id="cart-icon" src="{% static 'img/cart.webp' %}">
-                </a>
+                    <a>
+                        <img  id="cart-icon" data-product={{producto.id}} data-action="add" class="add-btn update-cart" src="{% static 'img/cart.webp' %}">
+                    </a>
                 </div>
             </div>
-            <h5>$10000</h5>
-            <p class="justify">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            <h5>{{producto.price}}</h5>
+            <p class="justify">{{producto.description}}</p>
             <div class="d-flex justify-content-around">
                 <div class="d-flex align-items-center gap-2">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square" viewBox="0 0 16 16">
+                    <svg id="btnMenos" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dash-square" viewBox="0 0 16 16">
                         <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                         <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
                     </svg>
-                    <span class="fs-6"> 3 </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
+                    <span id="numeroItems"> 1 </span>
+                    <svg id="btnMas" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-square" viewBox="0 0 16 16">
                         <path d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z"/>
                         <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                     </svg>
                 </div>
-                    <button type="button" class="btn btn-outline-primary">Pagar</button>
+                <a id="btnPagar" type="submit" class="btn btn-outline-primary" href="{% url 'checkout' %}?producto={{producto.id}}&cantidad=1">Pagar</a>
             </div>
         </div>
     </div>
-    <div class="row">
-        <h4>Título</h4>
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        <div class="col">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-secondary">An item</li>
-                <li class="list-group-item list-group-item-secondary">A second item</li>
-                <li class="list-group-item list-group-item-secondary">A third item</li>
-                <li class="list-group-item list-group-item-secondary">A fourth item</li>
-                <li class="list-group-item list-group-item-secondary">And a fifth one</li>
-            </ul>
-        </div>
-        <div class="col">
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item list-group-item-secondary">An item</li>
-                <li class="list-group-item list-group-item-secondary">A second item</li>
-                <li class="list-group-item list-group-item-secondary">A third item</li>
-                <li class="list-group-item list-group-item-secondary">A fourth item</li>
-                <li class="list-group-item list-group-item-secondary">And a fifth one</li>
-            </ul>
-        </div>
-    </div>
+
     <div class="row mt-5">
         <div class="d-grid gap-2 d-md-flex justify-content-between mb-5">
             <h4>Comentarios</h4>
@@ -85,5 +70,42 @@
         </div>
     </div>
 
+    <script>
+
+        let numero =  document.getElementById("numeroItems");
+        let mas = document.getElementById("btnMas");
+        let menos = document.getElementById("btnMenos");
+        let btnPagar = document.getElementById('btnPagar');
+
+        //console.log(numero, mas, menos);
+
+        let inicio = 1;
+
+        mas.addEventListener('click', () =>{ 
+
+            numero.innerHTML = ++inicio;
+
+            btnPagar.setAttribute('href', "{% url 'checkout' %}?producto={{producto.id}}&cantidad=" + parseInt(numero.innerHTML));
+            
+        });
+
+        menos.addEventListener('click', () =>{ 
+
+            if(parseInt(numero.innerHTML) <= 1){
+
+                numero.innerHTML = 1
+
+            }else{
+
+                numero.innerHTML = --inicio;
+
+                btnPagar.setAttribute('href', "{% url 'checkout' %}?producto={{producto.id}}&cantidad=" + parseInt(numero.innerHTML));
+
+            }
+        });
+
+        
+
+    </script>
 
 {% endblock content %}
