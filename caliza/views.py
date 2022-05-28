@@ -29,6 +29,22 @@ def cart(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/cart.html', context)
 
+def wishList(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
+
+    products = Product.objects.all()
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': products}
+    return render(request, 'caliza/wishList.html', context)
+
+def login(request):
+    return render(request, 'caliza/login.html')
+
+def signIn(request):
+    return render(request, 'caliza/signIn.html')
+
 def checkout(request):
 
     if request.GET:
