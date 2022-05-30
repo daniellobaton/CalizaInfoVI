@@ -102,10 +102,14 @@
         </ul>
         
         <div class="form-inline my-2 my-lg-0">
-          <a href="{% url 'login' %}"class="btn btn-warning">Iniciar sesión</a>
-          <a href="{% url 'wishList' %}">
-            <img  id="cart-icon" src="{% static 'img/like.webp' %}">
-          </a>
+          {% if user %}
+            <a href="{% url 'wishList' %}">
+              <img  id="cart-icon" src="{% static 'img/like.webp' %}">
+            </a>
+            <p>{{user}}</p>
+          {% else %}
+            <a href="{% url 'loginUser' %}"class="btn btn-warning">Iniciar sesión</a>
+          {% endif %}
           <a href="{% url 'cart' %}">
            <img  id="cart-icon" src="{% static 'img/cart.webp' %}">
           </a>

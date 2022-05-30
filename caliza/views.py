@@ -1,6 +1,8 @@
-import re
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.http import JsonResponse
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
+from django.contrib import messages
 import json
 import datetime
 from .models import *
@@ -39,8 +41,34 @@ def wishList(request):
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': products}
     return render(request, 'caliza/wishList.html', context)
 
-def login(request):
-    return render(request, 'caliza/login.html')
+def loginUser(request):
+    
+    if request.method == "POST":
+        # print(f"estás en el post")
+        form = AuthenticationForm(request, data = request.POST)
+        # print(f"{form}")
+        if form.is_valid():
+            user = form.cleaned_data.get('username')
+            key = form.cleaned_data.get('password')
+            credentials = authenticate(username = user, password = key)
+            
+            # print(f"acceso válido")
+            print(f"{credentials}")
+            
+            if credentials is not None:
+                login(request, credentials)
+                messages.info(request, f"Estás logueado como {user}")
+                return redirect('store')
+            else:
+                messages.error(request, "Usuario o clave incorrectos")
+        else:
+            # print(f"acceso no válido")
+            messages.error(request, "Usuario o clave incorrectos")
+    # messages.info(request, f"mensaje {user}")
+      
+    form = AuthenticationForm()
+    context = {'form': form}
+    return render(request, 'caliza/loginUser.html', context)
 
 def signIn(request):
     return render(request, 'caliza/signIn.html')
