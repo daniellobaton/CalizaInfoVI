@@ -58,11 +58,45 @@ def cartData(request):
     else:
         cookieData = cookieCart(request)
         cartItems = cookieData['cartItems']
+        
         order = cookieData['order']
         items = cookieData['items']
 
-
     return {'cartItems': cartItems, 'order': order, 'items': items}
+
+def individualPurchase(request):
+    if request.user.is_authenticated:
+        productId = request.GET['producto']
+        product = Product.objects.get(id = productId)
+        cantidad = request.GET['cantidad']
+        total = int(product.price) * cantidad
+        #print('producto: ', product)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        
+    else:
+        productId = request.GET['producto']
+        product = Product.objects.get(id = productId)
+        cantidad = request.GET['cantidad']
+        total = int(product.price) * cantidad
+        order = {}
+
+    item = {
+            'product':{
+                'id': product.id,
+                'name': product.name,
+                'price': product.price,
+                'imageURL': product.imageURL,
+            },
+            'quantity': cantidad,
+            'getTotal': total
+    }
+
+    #if product.digital == False:
+      #  order['shipping'] = True
+
+    return {'item': item, 'order': order}
+    #return {'order': order}
 
 
 def guestOrder(request, data):

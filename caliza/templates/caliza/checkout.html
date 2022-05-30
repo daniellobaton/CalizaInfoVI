@@ -8,10 +8,10 @@
                     {% csrf_token %}
                     <div id="user-info">
 						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Nombre..">
+							<input required class="form-control" type="text" name="name" placeholder="Nombre...">
 						</div>
 						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
+							<input required class="form-control" type="email" name="email" placeholder="Email...">
 						</div>
 					</div>
 					
@@ -57,16 +57,36 @@
                 <h3>Resumen de compra</h3>
 
                 <hr>
-                {% for item in items %}
-                <div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>{{item.product.price}}</p></div>
-					<div style="flex:1"><p>{{item.quantity}}</p></div>
-				</div>
-                {% endfor %}
-				<h5>Productos:   {{order.getCartItems}}</h5>
-				<h5>Total:   {{order.getCartTotal|floatformat:2}}</h5>
+                {% if iterable %}
+                    {% for item in items %}
+                    <div class="cart-row">
+                        <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                        <div style="flex:2"><p>{{item.product.name}}</p></div>
+                        <div style="flex:1"><p>${{item.product.price}}</p></div>
+                        <div style="flex:1"><p>{{item.quantity}}</p></div>
+                    </div>
+                    
+                    {% endfor %}
+                    <h5>Productos:   {{order.getCartItems}}</h5>
+                    <h5>Total:   {{order.getCartTotal|floatformat:2}}</h5>
+                    <script>
+                        var total = '{{order.getCartTotal|floatformat:2}}';
+                    </script>
+                {% else %}
+                    <div class="cart-row">
+                        <div style="flex:2"><img class="row-image" src="{{items.imageURL}}"></div>
+                        <div style="flex:2"><p>{{items.name}}</p></div>
+                        <div style="flex:1"><p>${{items.price}}</p></div>
+                        <div style="flex:1"><p>{{quantity}}</p></div>
+                    </div>
+                    <h5>Productos:   {{quantity}}</h5>
+				    <h5>Total:   ${{total}}</h5>
+
+                    <script>
+                        var total = '{{total}}';
+                    </script>
+                {% endif %}
+				
 
             </div>
         </div>
@@ -76,7 +96,7 @@
 
     <script>
 
-        let total = '{{order.getCartTotal|floatformat:2}}';
+        //let total = '{{order.getCartTotal|floatformat:2}}';
 
         paypal.Buttons({
 
