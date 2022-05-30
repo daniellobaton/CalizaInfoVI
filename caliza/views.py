@@ -80,7 +80,6 @@ def ourProducts(request):
     data = cartData(request)
     cartItems = data['cartItems']
     productsList = Product.objects.all()
-    
     # Set up pagination
     pagination = Paginator(Product.objects.all(), 9)
     page = request.GET.get('page')

@@ -30,23 +30,23 @@
         <div class="col-3 mt-5">
             <h3 class="fw-bold"> Categorías </h3>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <input class="form-check-input" id="rbMuebles" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                 <label class="form-check-label" for="exampleRadios1"> Muebles </label>
             </div>
             <div class="form-check mb-5">
-                <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <input class="form-check-input" id="rbLimpieza" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
                 <label class="form-check-label" for="exampleRadios1"> Productos de limpieza </label>
             </div>
             <h3 class="fw-bold"> Precio </h3>
             <div class="form-check">
-                <input class="form-check-input" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
-                <label class="form-check-label" for="exampleRadios2"> Mayor a 1,000 </label>
+                <input class="form-check-input" id="rbMayor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
+                <label class="form-check-label"  for="exampleRadios2"> Mayor a 1,000 </label>
             </div>
             <div class="form-check mb-5">
-                <input class="form-check-input" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
+                <input class="form-check-input" id="rbMenor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
                 <label class="form-check-label" for="exampleRadios2"> Menor a 1,000 </label>
             </div>
-            <h3 class="fw-bold"> Calificación </h3>
+            <!-- <h3 class="fw-bold"> Calificación </h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
                     <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
                 </svg>
@@ -61,22 +61,24 @@
                 </svg>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star" viewBox="0 0 16 16">
                     <path d="M2.866 14.85c-.078.444.36.791.746.593l4.39-2.256 4.389 2.256c.386.198.824-.149.746-.592l-.83-4.73 3.522-3.356c.33-.314.16-.888-.282-.95l-4.898-.696L8.465.792a.513.513 0 0 0-.927 0L5.354 5.12l-4.898.696c-.441.062-.612.636-.283.95l3.523 3.356-.83 4.73zm4.905-2.767-3.686 1.894.694-3.957a.565.565 0 0 0-.163-.505L1.71 6.745l4.052-.576a.525.525 0 0 0 .393-.288L8 2.223l1.847 3.658a.525.525 0 0 0 .393.288l4.052.575-2.906 2.77a.565.565 0 0 0-.163.506l.694 3.957-3.686-1.894a.503.503 0 0 0-.461 0z"/>
-                </svg>
+                </svg> -->
         </div>
         
         <div class="col-9">
             <div class="row">
-                {% for product in products %}
-                <div class="col-4 mt-5">
+                {% for product in productsList %}
+                <div class="col-4 mt-5 tarjeta">
                     <img src="{{product.imageURL}}" class="img-fluid thumbnail">
                     <div class="box-element product">
                         <h5><strong>{{product.name}}</strong></h5>
+                        <h5 style="display: none;" class="categoria">{{product.categoria}}</h5>
                         <hr>
-                        <h5>${{product.price|floatformat:2}}</h5>
+                        <h5 class="precio">${{product.price}}</h5>
                         <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</button>
                         <a class="btn btn-outline-success" href="#">Ver</a>
                     </div>
                 </div>
+
                 {% endfor %}
             </div>
         </div>
@@ -110,4 +112,112 @@
             </ul>
         </nav>
     </div>
+    <script>
+
+        document.getElementById('rbMayor').addEventListener('click', mayorMil);
+        document.getElementById('rbMenor').addEventListener('click', menorMil);
+        document.getElementById('rbMuebles').addEventListener('click', filtroMueble);
+        document.getElementById('rbLimpieza').addEventListener('click', filtroLimpieza);
+
+        function mayorMil(){
+
+            let contenedores = document.getElementsByClassName('tarjeta');
+
+            for(let i = 0; i < contenedores.length; i++){
+
+                //let precio = parseInt(contenedores[i].children[1].children[2].innerHTML.slice(1));
+
+                let precio = parseInt(document.getElementsByClassName('precio')[i].innerHTML.slice(1));
+
+                if(precio < 300){
+
+                    contenedores[i].style.display = 'none';
+
+                }else{
+
+                    contenedores[i].style.display = 'block';
+
+                }
+                
+            }
+
+        }
+
+
+        function menorMil(){
+
+            let contenedores = document.getElementsByClassName('tarjeta');
+
+            //console.log(contenedores);
+
+            for(let i = 0; i < contenedores.length; i++){
+
+                //let precio = parseInt(contenedores[i].children[1].children[2].innerHTML.slice(1));
+                let precio = parseInt(document.getElementsByClassName('precio')[i].innerHTML.slice(1));
+
+                if(precio > 300){
+
+                    contenedores[i].style.display = 'none';
+
+                }else{
+
+                    contenedores[i].style.display = 'block';
+
+                }
+
+                console.log(contenedores[i].style.display);
+
+            }
+
+        }
+
+        function filtroMueble(){
+
+            let contenedores = document.getElementsByClassName('tarjeta');
+
+            console.dir(contenedores[0]);
+
+            for(let i = 0; i < contenedores.length; i++){
+
+                let categoria = document.getElementsByClassName('categoria')[i].innerHTML;
+
+                if(categoria === 'Mueble'){
+
+                    contenedores[i].style.display = 'block';
+
+                }else{
+
+                    contenedores[i].style.display = 'none';
+
+                }
+                
+            }
+
+        }
+
+        function filtroLimpieza(){
+
+            let contenedores = document.getElementsByClassName('tarjeta');
+
+            console.dir(contenedores[0]);
+
+            for(let i = 0; i < contenedores.length; i++){
+
+                let categoria = document.getElementsByClassName('categoria')[i].innerHTML;
+
+                if(categoria === 'Limpieza'){
+
+                    contenedores[i].style.display = 'block';
+
+                }else{
+
+                    contenedores[i].style.display = 'none';
+
+                }
+                
+            }
+
+        }
+
+    </script>
 {% endblock content %}
