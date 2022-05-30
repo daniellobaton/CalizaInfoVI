@@ -7,6 +7,7 @@ import json
 import datetime
 from .models import *
 from . utils import cookieCart, cartData, guestOrder, individualPurchase
+from . forms import SignInUserForm
 
 # Import pagination stuff
 from django.core.paginator import Paginator
@@ -71,7 +72,33 @@ def loginUser(request):
     return render(request, 'caliza/loginUser.html', context)
 
 def signIn(request):
-    return render(request, 'caliza/signIn.html')
+    
+    if request.method == "POST":
+        form = SignInUserForm(request.POST)
+        
+        if form.is_valid():
+            formSave = form.save()
+            
+            Customer.objects.create(
+                user = formSave,
+                name = formSave.username,
+                email = formSave.email
+            ) 
+            
+            user = form.cleaned_data['username']
+            key = form.cleaned_data['password1']
+            credentials = authenticate(username=user, password=key)
+            
+            
+            login(request, credentials)
+            
+            messages.success(request, ("Registro exitoso"))
+            return redirect('store')
+    else: 
+        form = SignInUserForm()
+        
+    context = {'form': form}
+    return render(request, 'caliza/signIn.html', context)
 
 def checkout(request):
 
