@@ -132,6 +132,14 @@ def checkout(request):
     return render(request, 'caliza/checkout.html', context)
 
 def ourProducts(request):
+
+    hayCategoria = False
+    categoria = None
+
+    if request.GET:
+        hayCategoria = True
+        categoria = request.GET['categoria']
+
     data = cartData(request)
     cartItems = data['cartItems']
     productsList = Product.objects.all()
@@ -141,7 +149,7 @@ def ourProducts(request):
     products = pagination.get_page(page)
     nums = "a" * products.paginator.num_pages
     
-    context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems}
+    context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems, 'hayCategoria': hayCategoria, 'categoria': categoria}
     return render(request, 'caliza/ourProducts.html', context)
     
 def individualProduct(request):
@@ -171,8 +179,9 @@ def masVendidos(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
+    products = Product.objects.all()[:10]
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    context = {'items': items, 'order': order, 'cartItems': cartItems,'products': products}
     return render(request, 'caliza/masVendidos.html', context) 
 
 def updateItem(request):

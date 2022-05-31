@@ -34,7 +34,7 @@
                 <label class="form-check-label" for="exampleRadios1"> Muebles </label>
             </div>
             <div class="form-check mb-5">
-                <input class="form-check-input" id="rbLimpieza" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                <input class="form-check-input" id="rbLimpieza" type="radio" name="exampleRadios" id="exampleRadios1" value="option1">
                 <label class="form-check-label" for="exampleRadios1"> Productos de limpieza </label>
             </div>
             <h3 class="fw-bold"> Precio </h3>
@@ -43,7 +43,7 @@
                 <label class="form-check-label"  for="exampleRadios2"> Mayor a 1,000 </label>
             </div>
             <div class="form-check mb-5">
-                <input class="form-check-input" id="rbMenor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
+                <input class="form-check-input" id="rbMenor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2">
                 <label class="form-check-label" for="exampleRadios2"> Menor a 1,000 </label>
             </div>
              <!-- <h3 class="fw-bold"> Calificación </h3>
@@ -76,7 +76,7 @@
                         <hr>
                         <h5 class="precio">${{product.price}}</h5>
                         <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</button>
-                        <a class="btn btn-outline-success" href="#">Ver</a>
+                        <a class="btn btn-outline-success" href="{% url 'individual_product' %}?producto={{product.id}}">Ver</a>
                     </div>
                 </div>
 
@@ -216,6 +216,42 @@
 
                 }
                 
+            }
+
+        }
+
+    </script>
+
+    <script>
+
+        let hay;
+
+        if("{{hayCategoria}}" === 'True'){
+
+            hay = true;
+
+        }else{
+
+            hay = false;
+
+        }
+
+        //console.log(typeof(hay));
+
+        if(hay){
+
+            if("{{categoria}}" === 'mueble'){
+
+                document.getElementById("rbMuebles").checked = true;
+
+                filtroMueble();
+
+            }else{
+
+                document.getElementById("rbLimpieza").checked = true;
+
+                filtroLimpieza();
+
             }
 
         }
