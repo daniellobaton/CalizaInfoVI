@@ -37,15 +37,18 @@
             <h2 class="titulo">Categorías</h2>
             <div class="conteiner">
                 <div class="imagenB">
-                    <figure>
-                        <img src="{% static 'img/categoria1.webp' %}" alt="">
-                        <div class="capa">
-                            <h3>Muebles</h3>          
-                        </div>
-                    </figure>
+                    <a href="{% url 'ourProducts' %}?categoria=mueble">
+                        <figure>
+                            <img src="{% static 'img/categoria1.webp' %}" alt="">
+                            
+                            <div class="capa">
+                                <h3>Muebles</h3>          
+                            </div>
+                        </figure>
+                    </a>
                 </div>
                 <div class="imagenB2">
-                    <a href="https://www.youtube.com/">
+                    <a href="{% url 'ourProducts' %}?categoria=limpieza">
                     <figure>
                         <img src="{% static 'img/categoria2.webp' %}">
                         <div class="capa">
