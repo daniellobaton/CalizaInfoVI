@@ -13,6 +13,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
   <!-- normalize.css -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/externas/normalize.css' %}">
   <!-- Hoja de estilos propia -->
@@ -90,7 +91,7 @@
   <nav class="navbar navbar-expand-lg fondo-principal navbar-light
    shadow p-1 mb-3 rounded">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'store' %}"><img src="../../../static/img/logoCalizaPequeno.webp" alt=""></a>
+      <a class="navbar-brand" href="{% url 'store' %}"><img src="{% static 'img/logoCalizaPequeno.webp' %}" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -153,7 +154,7 @@
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container-fluid" style="padding: 0;">
 
     {% block content %}
 

@@ -15,13 +15,14 @@ p {
   height: 600px;
   background: #005AA7;
   /* fallback for old browsers */
-  background: -webkit-linear-gradient(to right, hsla(55deg, 100%, 95%, 0.466), hsla(208deg, 100%, 33%, 0.444)), url(../img/categoria1.webp);
+  background: -webkit-linear-gradient(to right, hsla(55deg, 100%, 95%, 0.466), hsla(208deg, 100%, 33%, 0.444)), url(../../../static/img/categoria1.webp);
   /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to right, hsla(55deg, 100%, 95%, 0.466), hsla(208deg, 100%, 33%, 0.444)), url(../img/categoria1.webp);
+  background: linear-gradient(to right, hsla(55deg, 100%, 95%, 0.466), hsla(208deg, 100%, 33%, 0.444)), url(../../../static/img/categoria1.webp);
   /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
   background-size: cover;
   background-attachment: fixed;
   position: relative;
+  margin: 0;
 }
 
 .textos-header {
@@ -32,6 +33,7 @@ p {
   justify-content: center;
   flex-direction: column;
   text-align: center;
+  padding: 0;
 }
 
 .textos-header h1 {
@@ -48,7 +50,7 @@ p {
 .wave {
   position: absolute;
   bottom: 0;
-  width: 100%;
+  width: 100vw;
 }
 
 .fondo-principal {
@@ -193,7 +195,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .contenedor {
   padding: 60px0;
-  width: 100%;
+  width: 90%;
   max-width: 1000px;
   margin: auto;
   overflow: hidden;
@@ -207,6 +209,11 @@ h1, h2, h3, h4, h5, h6 {
 .conteiner {
   display: flex;
   justify-content: space-around;
+}
+
+.contenedor-categorias {
+  margin-right: 0;
+  margin-left: 0;
 }
 
 .imagenB {

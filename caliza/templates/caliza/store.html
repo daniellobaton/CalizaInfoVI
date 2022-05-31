@@ -8,32 +8,37 @@
             <h1 class="titulo">Caliza</h1>
             <h2>Lo mejor para tu hogar</h2>
         </div>
-        <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.99 C116.47,148.51 387.92,-1.48 500.00,49.99 L503.61,152.46 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
+        <div class="wave" style="height: 150px; overflow: hidden; padding: 0;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.99 C116.47,148.51 387.92,-1.48 500.00,49.99 L503.61,152.46 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
     </div>
 
-    <!-- Sobre nosotros -->
-    <div class="row contenedor sobre-nosotros">
+     <!-- Sobre nosotros -->
+    <div class="row contenedor sobre-nosotros mt-5">
         <div class="col">
             <h2 class="titulo">¿Quienes somos?</h2>
-            <div class="contenedor-sobre-nosotros d-flex gap-2">
-                <img src="{% static 'img/logoCalizaMediano.webp' %}" alt="Logo Caliza">
-                <div class="contenido-textos">
-                    <h3><span></span>Misión</h3>
-                    <p>Buscamos satisfacer necesidades básicas del hogar mediante la venta de muebles y productos de limpieza de calidad</p>
-                    <h3><span></span>Vision </h3>
-                    <p>Ser la empresa líder en la venta y distrubución de muebles y artículos de limpieza en el ámbito del ecommerce</p>
+            <div class="contenedor-sobre-nosotros d-flex gap-2 row">
+                <div class="col-4 d-flex justify-content-center align-items-center">
+                    <img class="img-fluid" src="{% static 'img/logoCalizaPequeno.webp' %}" alt="Logo Caliza"> 
                 </div>
+                <div class="col-6">
+                   <div class="contenido-textos">
+                        <h3><span>Misión</span></h3>
+                        <p>Buscamos satisfacer necesidades básicas del hogar mediante la venta de muebles y productos de limpieza de calidad</p>
+                        <h3><span>Vision</span> </h3>
+                        <p>Ser la empresa líder en la venta y distrubución de muebles y artículos de limpieza en el ámbito del ecommerce</p>
+                    </div> 
+                </div>           
             </div>
         </div>
-    </div>
+    </div> 
 
-    <div class="row contenedor-categorias mt-5">
-        <div class="col">
+    <!-- Categorías -->
+    <div class="row contenedor-categorias mt-5 justify-content-center gap-5">
+        <div class="col-10" style="padding-right: 0px;padding-left: 0px;">
             <h2 class="titulo">Categorías</h2>
             <div class="conteiner">
                 <div class="imagenB">
                     <figure>
-                        <img src="img/categoria1.jpg" alt="">
+                        <img src="{% static 'img/categoria1.webp' %}" alt="">
                         <div class="capa">
                             <h3>Muebles</h3>          
                         </div>
@@ -42,7 +47,7 @@
                 <div class="imagenB2">
                     <a href="https://www.youtube.com/">
                     <figure>
-                        <img src="img/categoria2.jpg">
+                        <img src="{% static 'img/categoria2.webp' %}">
                         <div class="capa">
                             <h3>Limpieza</h3>          
                         </div>
@@ -51,13 +56,15 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> 
 
     <!-- Los más vendidos -->
-    <div class="row">
+    <div class="row" style="margin-right: 0px;margin-left: 0px;">
         <div class="col p-5">
             <div class="row">
-                <h2 class="text-center mb-4">Los más vendidos</h2>
+                <div class="col">
+                    <h2 class="text-center mb-4">Los más vendidos</h2>
+                </div>
             </div>
             <div class="row">
                 {% for product in products %}
@@ -75,8 +82,34 @@
                 {% endfor %}
             </div>
         </div>
-        
     </div>
 
-    
+     <!-- Nuestras marcas -->
+    <div class="row" style="margin-right: 0px;margin-left: 0px;">
+        <div class="col-10 mx-auto">
+            <div class="row">
+                <div class="col">
+                    <h2 class="text-center mb-4">Nuestras marcas</h2>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-2">
+                    <img class="img-fluid" src="../../../static/img/company-logo-1.webp" alt="Marca 1">
+                </div>
+                <div class="col-2">
+                    <img class="img-fluid" src="../../../static/img/company-logo-2.webp" alt="Marca 2">
+                </div>
+                <div class="col-2">
+                    <img class="img-fluid" src="../../../static/img/company-logo-3.webp" alt="Marca 3">
+                </div>
+                <div class="col-2">
+                    <img class="img-fluid" src="../../../static/img/company-logo-4.webp" alt="Marca 4">
+                </div>
+                <div class="col-2">
+                    <img class="img-fluid" src="../../../static/img/company-logo-5.webp" alt="Marca 5">
+                </div>
+            </div>
+        </div>
+    </div> 
+
 {% endblock content %}

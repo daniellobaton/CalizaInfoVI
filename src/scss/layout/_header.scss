@@ -11,11 +11,12 @@
     width:100%;
     height:600px;
     background: #005AA7;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, hsla(55, 100%, 95%, 0.466), hsla(208, 100%, 33%, 0.444)), url(../img/categoria1.jpg);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, hsla(55, 100%, 95%, 0.466), hsla(208, 100%, 33%, 0.444)), url(../img/categoria1.jpg); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-   background-size: cover;
+    background: -webkit-linear-gradient(to right, hsla(55, 100%, 95%, 0.466), hsla(208, 100%, 33%, 0.444)), url(../../../static/img/categoria1.webp);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, hsla(55, 100%, 95%, 0.466), hsla(208, 100%, 33%, 0.444)), url(../../../static/img/categoria1.webp); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background-size: cover;
     background-attachment:fixed;
     position:relative;
+    margin: 0;
 }
 
 
@@ -28,6 +29,7 @@
     justify-content:center;
     flex-direction:column;
     text-align:center;
+    padding: 0;
 }
 
 
@@ -44,5 +46,5 @@
 .wave{
     position:absolute;
     bottom:0;
-    width:100%;
+    width:100vw;
 } 

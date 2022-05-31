@@ -17,7 +17,7 @@ def store(request):
     data = cartData(request)
     cartItems = data['cartItems']
 
-    products = Product.objects.all()
+    products = Product.objects.all()[:6]
     context = {'products': products, 'cartItems': cartItems}
     return render(request, 'caliza/store.html', context)
 
