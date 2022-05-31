@@ -39,34 +39,40 @@
       <div class="row mt-5 justify-content-md-center">
         <div class="col-4">
           <h3 class="text-center">Registrarme</h3>
-          <form>
+          {% comment %} <form>
             <div class="mb-3">
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Continuar con Facebook">
             </div>
             <div class="mb-3">
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Continuar con Google">
             </div>
-            {% comment %} <button type="submit" class="btn btn-primary">Submit</button> {% endcomment %}
-          </form>
+          </form> {% endcomment %}
           <p class="text-center">o</p>
-          <form>
+          <form action="{% url 'signIn' %}" method="POST">
+            {% csrf_token %}
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
                   <img src="{% static 'img/user.png' %}">
                 </span>
-                <input type="user" class="form-control" id="exampleInputUser" aria-describedby="userHelp" placeholder="Nombre de usuario">
+                <input type="text" name="username" class="form-control" id="exampleInputUser" aria-describedby="userHelp" placeholder="Nombre de usuario">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
                 <img src="{% static 'img/email.webp' %}">
               </span>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
+              <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
                 <img src="{% static 'img/lock.webp' %}">
               </span>
-              <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+              <input type="password" name="password1" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="basic-addon1">
+                <img src="{% static 'img/lock.webp' %}">
+              </span>
+              <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Repite tu contraseña">
             </div>
             <div class="d-grid gap-2 mx-auto">
               <button type="submit" class="btn btn-primary">Registrarme</button>
