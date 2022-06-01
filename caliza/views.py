@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
+from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -72,8 +73,22 @@ def loginUser(request):
     return render(request, 'caliza/loginUser.html', context)
 
 def signIn(request):
-    
+
+    ultimoCustomer = Customer.objects.all().order_by('-id')[0]
+    ultimoUser = User.objects.all().order_by('-id')[0]
+ 
+    if ultimoCustomer.id != ultimoUser.id:
+
+        Customer.objects.create(
+                user = ultimoUser,
+                name = ultimoUser.name,
+                email = ultimoUser.email
+        )
+
     if request.method == "POST":
+
+        print('POST activado')
+
         form = SignInUserForm(request.POST)
         
         if form.is_valid():
@@ -96,7 +111,8 @@ def signIn(request):
             return redirect('store')
     else: 
         form = SignInUserForm()
-        
+
+    
     context = {'form': form}
     return render(request, 'caliza/signIn.html', context)
 
