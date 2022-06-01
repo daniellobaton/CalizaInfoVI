@@ -73,24 +73,28 @@ def loginUser(request):
     return render(request, 'caliza/loginUser.html', context)
 
 def signIn(request):
-
-    ultimoCustomer = Customer.objects.all().order_by('-id')[0]
+    
+    # ultimoCustomer = Customer.objects.all().order_by('-id')[0]
     ultimoUser = User.objects.all().order_by('-id')[0]
- 
-    if ultimoCustomer.id != ultimoUser.id:
+    numeroCustomers = Customer.objects.count()
+    numeroUsers = User.objects.count()
+    
+    if numeroUsers > numeroCustomers:
 
         Customer.objects.create(
-                user = ultimoUser,
-                name = ultimoUser.name,
-                email = ultimoUser.email
+            user = ultimoUser,
+            name = ultimoUser.username,
+            email = ultimoUser.email
         )
-
+        return redirect('store')
+        # isAuthenticated = True
+    
     if request.method == "POST":
 
         print('POST activado')
 
         form = SignInUserForm(request.POST)
-        
+        # print(f"{form}")
         if form.is_valid():
             formSave = form.save()
             
@@ -111,7 +115,10 @@ def signIn(request):
             return redirect('store')
     else: 
         form = SignInUserForm()
+<<<<<<< HEAD
 
+=======
+>>>>>>> 71703cb50654dc3da1afe16cade1c4ec9cd975bf
     
     context = {'form': form}
     return render(request, 'caliza/signIn.html', context)
