@@ -115,11 +115,7 @@ def signIn(request):
             return redirect('store')
     else: 
         form = SignInUserForm()
-<<<<<<< HEAD
-
-=======
->>>>>>> 71703cb50654dc3da1afe16cade1c4ec9cd975bf
-    
+        
     context = {'form': form}
     return render(request, 'caliza/signIn.html', context)
 

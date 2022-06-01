@@ -1,6 +1,23 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
+
+    <!-- Script para modificar el sibrayado de las secciones -->
+    <script>
+
+        let linkSubrayado = document.getElementsByClassName('link-secciones');
+
+        for(let i = 0; i < linkSubrayado.length; i++){
+
+            linkSubrayado[i].classList.remove("subrayado");
+
+        }
+
+        document.getElementById('seccion-nuestros-productos').classList.add('subrayado');
+
+    </script>
+
+
     <!-- <div class="row justify-content-center">
         <div class="col-10">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">

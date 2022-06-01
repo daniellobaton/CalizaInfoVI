@@ -184,6 +184,11 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.2rem;
 }
 
+.subrayado {
+  text-decoration: overline;
+  text-decoration-style: double;
+}
+
 .image-perfil {
   border-radius: 50% 50%;
   width: 5rem;
