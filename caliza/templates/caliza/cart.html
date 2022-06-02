@@ -49,7 +49,7 @@
                     </div>
                     <div style="flex:2;">${{item.getTotal}}</div>
                     <div style="flex:1;">
-                        <img id="cart-icon" src="{% static 'img/delete.webp' %}">
+                    <img data-product="{{item.product.id}}" class="delete-cart" id="cart-icon" src="{% static 'img/delete.webp' %}">
                     </div>
                 </div>
                 {% endfor %}
