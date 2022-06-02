@@ -7,7 +7,6 @@ def cookieCart(request):
         cart = json.loads(request.COOKIES['cart'])
     except:
         cart = {}
-    print('Cart: ', cart)
     items = []
     order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
     cartItems = order['getCartItems']
@@ -63,6 +62,16 @@ def cartData(request):
         items = cookieData['items']
 
     return {'cartItems': cartItems, 'order': order, 'items': items}
+
+def wishListData(request):
+    
+    if request.user.is_authenticated:
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        items = order.orderitem_set.all()
+        wishListItems = order.getCartItems
+
+    return {'wishListItems': wishListItems, 'order': order, 'items': items}
 
 def individualPurchase(request):
     if request.user.is_authenticated:

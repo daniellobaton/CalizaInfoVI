@@ -7,7 +7,7 @@ from django.contrib import messages
 import json
 import datetime
 from .models import *
-from . utils import cookieCart, cartData, guestOrder, individualPurchase
+from . utils import cookieCart, cartData, guestOrder, individualPurchase, wishListData
 from . forms import SignInUserForm
 
 # Import pagination stuff
@@ -15,11 +15,21 @@ from django.core.paginator import Paginator
 
 # Create your views here.
 def store(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
-
+    # print(request.user.is_authenticated)
+    dataCart = cartData(request)
+    dataWishList = wishListData(request)
+    cartItems = dataCart['cartItems']
+    wishListItems = dataWishList['wishListItems']
     products = Product.objects.all()[:6]
-    context = {'products': products, 'cartItems': cartItems}
+    
+    if request.user.is_authenticated:
+        
+        context = {'products': products, 'wishListItems': wishListItems, 'cartItems': cartItems}
+        
+    else:
+        
+        context = {'products': products, 'cartItems': cartItems}
+    
     return render(request, 'caliza/store.html', context)
 
 def cart(request):
@@ -28,19 +38,16 @@ def cart(request):
     order = data['order']
     items = data['items']
 
-    #print('La request es: ', request)
-
     context = {'items': items, 'order': order, 'cartItems': cartItems}
     return render(request, 'caliza/cart.html', context)
 
 def wishList(request):
-    data = cartData(request)
-    cartItems = data['cartItems']
+    data = wishListData(request)
+    wishListItems = data['wishListItems']
     order = data['order']
     items = data['items']
 
-    products = Product.objects.all()
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': products}
+    context = {'items': items, 'order': order, 'wishListItems': wishListItems}
     return render(request, 'caliza/wishList.html', context)
 
 def loginUser(request):
