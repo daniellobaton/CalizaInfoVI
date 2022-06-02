@@ -1,6 +1,23 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
+
+    <!-- Script para modificar el sibrayado de las secciones -->
+    <script>
+
+        let linkSubrayado = document.getElementsByClassName('link-secciones');
+
+        for(let i = 0; i < linkSubrayado.length; i++){
+
+            linkSubrayado[i].classList.remove("subrayado");
+
+        }
+
+        document.getElementById('seccion-nuestros-productos').classList.add('subrayado');
+
+    </script>
+
+
     <!-- <div class="row justify-content-center">
         <div class="col-10">
             <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -40,11 +57,11 @@
             <h3 class="fw-bold"> Precio </h3>
             <div class="form-check">
                 <input class="form-check-input" id="rbMayor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
-                <label class="form-check-label"  for="exampleRadios2"> Mayor a 1,000 </label>
+                <label class="form-check-label"  for="exampleRadios2"> Mayor a $100 </label>
             </div>
             <div class="form-check mb-5">
                 <input class="form-check-input" id="rbMenor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2"> Menor a 1,000 </label>
+                <label class="form-check-label" for="exampleRadios2"> Menor a $100 </label>
             </div>
              <!-- <h3 class="fw-bold"> Calificación </h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -130,7 +147,7 @@
 
                 let precio = parseInt(document.getElementsByClassName('precio')[i].innerHTML.slice(1));
 
-                if(precio < 300){
+                if(precio < 100){
 
                     contenedores[i].style.display = 'none';
 
@@ -156,7 +173,7 @@
                 //let precio = parseInt(contenedores[i].children[1].children[2].innerHTML.slice(1));
                 let precio = parseInt(document.getElementsByClassName('precio')[i].innerHTML.slice(1));
 
-                if(precio > 300){
+                if(precio > 100){
 
                     contenedores[i].style.display = 'none';
 
@@ -166,7 +183,7 @@
 
                 }
 
-                console.log(contenedores[i].style.display);
+                //console.log(contenedores[i].style.display);
 
             }
 

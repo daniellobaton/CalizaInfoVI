@@ -2,6 +2,21 @@
 {% load static %}
 {% block content %}
 
+<!-- Script para modificar el sibrayado de las secciones -->
+<script>
+
+    let linkSubrayado = document.getElementsByClassName('link-secciones');
+
+    for(let i = 0; i < linkSubrayado.length; i++){
+
+        linkSubrayado[i].classList.remove("subrayado");
+
+    }
+
+    document.getElementById('seccion-mas-vendidos').classList.add('subrayado');
+
+</script>
+
 <!-- Los más vendidos -->
 <div class="row" style="margin-right: 0px;margin-left: 0px;">
     <div class="col p-5">

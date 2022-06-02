@@ -1,4 +1,65 @@
-var updateBtns = document.getElementsByClassName('update-cart');
+let updateBtns = document.getElementsByClassName('update-cart');
+let deleteBtns = document.getElementsByClassName('delete-cart');
+
+console.log(deleteBtns);
+
+for(let i = 0; i < deleteBtns.length; i++){
+
+    console.log(deleteBtns);
+
+    deleteBtns[i].addEventListener('click', function(){
+
+        console.log('Boton eliminar clickeado');
+
+        let productId = this.dataset.product;
+
+        if(user === 'AnonymousUser'){
+
+            deleteCookieItem(productId);
+
+        }else{
+
+            deleteCartItem(productId);
+
+        }
+
+    });
+
+}
+
+function deleteCookieItem(productId){
+
+    delete cart[productId];
+
+    document.cookie = 'cart=' + JSON.stringify(cart) + ";domain=;path=/";
+
+    location.reload();
+
+}
+
+function deleteCartItem(productId){
+
+    var url = '/delete_items/';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify({'productId': productId})
+    })
+
+    .then((response) =>{
+        return response.json();
+    })
+    .then((data) =>{
+        console.log('data: ', data);
+        location.reload();
+    })
+
+}
+
 
 for(let i = 0; i < updateBtns.length; i++){
 

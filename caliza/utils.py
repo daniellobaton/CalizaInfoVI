@@ -131,3 +131,23 @@ def guestOrder(request, data):
         )
 
     return customer, order
+
+
+def borraItemCarrito(request):
+    if request.user.is_authenticated:
+        print('Usuario autenticado')
+        # productId = request.GET['producto']
+        # product = Product.objects.get(id = productId)
+        # cantidad = request.GET['cantidad']
+        # total = int(product.price) * cantidad
+        # #print('producto: ', product)
+        # customer = request.user.customer
+        # order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        
+    else:
+        print('Usuario no autenticado')
+        # productId = request.GET['producto']
+        # product = Product.objects.get(id = productId)
+        # cantidad = request.GET['cantidad']
+        # total = int(product.price) * cantidad
+        # order = {}

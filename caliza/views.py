@@ -1,5 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import JsonResponse
+from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
@@ -73,9 +74,27 @@ def loginUser(request):
 
 def signIn(request):
     
+    # ultimoCustomer = Customer.objects.all().order_by('-id')[0]
+    ultimoUser = User.objects.all().order_by('-id')[0]
+    numeroCustomers = Customer.objects.count()
+    numeroUsers = User.objects.count()
+    
+    if numeroUsers > numeroCustomers:
+
+        Customer.objects.create(
+            user = ultimoUser,
+            name = ultimoUser.username,
+            email = ultimoUser.email
+        )
+        return redirect('store')
+        # isAuthenticated = True
+    
     if request.method == "POST":
+
+        print('POST activado')
+
         form = SignInUserForm(request.POST)
-        
+        # print(f"{form}")
         if form.is_valid():
             formSave = form.save()
             
@@ -96,7 +115,7 @@ def signIn(request):
             return redirect('store')
     else: 
         form = SignInUserForm()
-        
+
     context = {'form': form}
     return render(request, 'caliza/signIn.html', context)
 
@@ -203,6 +222,21 @@ def updateItem(request):
     elif action == 'remove':
         orderItem.quantity -= 1
 
+    orderItem.save()
+
+    if orderItem.quantity <= 0:
+        orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)
+
+def deleteItems(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    customer = request.user.customer
+    product = Product.objects.get(id = productId)
+    order, created = Order.objects.get_or_create(customer = customer, complete = False)
+    orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)
+    orderItem.quantity -= 1
     orderItem.save()
 
     if orderItem.quantity <= 0:
