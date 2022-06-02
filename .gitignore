@@ -3,6 +3,6 @@ package-lock.json
 node_modules/
 src/img/*
 db.sqlite3
-imgWebP/*
-
+imgWebp/*
+imgWebp.rar
 **/__pycache__/
