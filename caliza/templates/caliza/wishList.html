@@ -20,18 +20,18 @@
                 {% for item in items %}
                 <div class="cart-row">
                     <div style="flex:2;">
-                        <img class="row-image" src="{{item.product.imageURL}}" alt="">
+                        <img class="row-image" src="{{item.product.imageURL}}" alt="producto">
                     </div>
                     <div style="flex:2;">{{item.product.name}}</div>
                     <div style="flex:2;">${{item.product.price|floatformat:2}}</div>
                     <div style="flex:2;">
-                        <a href="#" data-product={{product.id}} data-action="add" class="add-btn update-cart">
+                        <a href="#" data-product={{product.id}} class="btn add-btn">
                             <img id="cart-icon" src="{% static 'img/shopping-cart.webp' %}">
                         </a>
                     </div>
                     <div style="flex:1;">
                         <a href="#">
-                            <img id="cart-icon" src="{% static 'img/delete.webp' %}">
+                            <img class="delete-wish-list" id="cart-icon" src="{% static 'img/delete.webp' %}">
                         </a>
                     </div>
                 </div>
