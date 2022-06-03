@@ -19,6 +19,7 @@ class Product(models.Model):
     categoria = models.CharField(max_length=8, null=True)
 
     def __str__(self):
+            
         return self.name
         
     @property
@@ -59,12 +60,13 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderItems])
         return total
 
-    # @property
-    # def getWishListItems(self):
-    #     orderItems = self.orderitem_set.all()
-    #     total = sum([item.quantity for item in orderItems])
-    #     return total
+class GetProducts(models.Model):
+    customer = models.ForeignKey(Customer, on_delete = models.SET_NULL, blank = True, null = True)
+    product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
     
+    def __str__(self):
+        return str(self.id)
+       
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, blank = True, null = True)
