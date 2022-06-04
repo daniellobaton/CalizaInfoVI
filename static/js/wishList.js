@@ -1,11 +1,11 @@
-let updateBtns = document.getElementsByClassName('update-wish-list');
-let deleteBtns = document.getElementsByClassName('delete-wish-list');
+let updateWishList = document.getElementsByClassName('update-wish-list');
+let deleteWishList = document.getElementsByClassName('delete-wish-list');
 
-for(let i = 0; i < deleteBtns.length; i++){
+for(let i = 0; i < deleteWishList.length; i++){
 
-    deleteBtns[i].addEventListener('click', function() {
+    deleteWishList[i].addEventListener('click', function() {
 
-        let productId = this.dataset.product;
+        let productId = this.dataset.productwishlist;
 
         if(user){
 
@@ -40,18 +40,17 @@ function deleteWishListItem(productId){
 }
 
 
-for(let i = 0; i < updateBtns.length; i++){
+for(let i = 0; i < updateWishList.length; i++){
 
-    updateBtns[i].addEventListener('click', function(){
+    updateWishList[i].addEventListener('click', function(){
 
-        let productId = this.dataset.product;
-        let action = this.dataset.action;
+        let productId = this.dataset.productwishlist;
+        let action = this.dataset.actionwishlist;
 
-        // console.log('productId: ', productId, 'action: ', action);
-
-        // console.log('User: ', user);
+        console.log('product id: ', productId);
+        console.log('action: ', action);
         
-        if(user) {
+        if(user !== 'AnonymousUser') {
 
             updateUserOrder(productId, action);
 
@@ -103,7 +102,10 @@ for(let i = 0; i < updateBtns.length; i++){
 
 function updateUserOrder(productId, action){
 
-    var url = '/update_item/';
+    var url = '/update_wishList/';
+
+    console.log('product id: ', productId);
+    console.log('action: ', action);
 
     fetch(url, {
         method: 'POST',

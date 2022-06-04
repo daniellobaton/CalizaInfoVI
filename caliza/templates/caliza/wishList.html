@@ -17,25 +17,25 @@
                     <div style="flex:2;"><strong>Añadir al carrito</strong></div>
                     <div style="flex:1;"><strong>Borrar</strong></div>
                 </div>
-                {% for item in items %}
+                {% comment %} {% for product in products %} {% endcomment %}
                 <div class="cart-row">
                     <div style="flex:2;">
-                        <img class="row-image" src="{{item.product.imageURL}}" alt="producto">
+                        <img class="row-image" src="{{products.imageURL}}" alt="producto">
                     </div>
-                    <div style="flex:2;">{{item.product.name}}</div>
-                    <div style="flex:2;">${{item.product.price|floatformat:2}}</div>
+                    <div style="flex:2;">{{products.name}}</div>
+                    <div style="flex:2;">${{products.price|floatformat:2}}</div>
                     <div style="flex:2;">
-                        <a href="#" data-product={{product.id}} class="btn add-btn">
+                        <a data-product={{products.id}} class="btn add-btn">
                             <img id="cart-icon" src="{% static 'img/shopping-cart.webp' %}">
                         </a>
                     </div>
                     <div style="flex:1;">
-                        <a href="#">
+                        <a class="btn">
                             <img class="delete-wish-list" id="cart-icon" src="{% static 'img/delete.webp' %}">
                         </a>
                     </div>
                 </div>
-                {% endfor %}
+                {% comment %} {% endfor %} {% endcomment %}
 
             </div>
         </div>
