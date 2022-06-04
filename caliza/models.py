@@ -65,6 +65,10 @@ class Order(models.Model):
     #     total = sum([item.quantity for item in orderItems])
     #     return total
     
+class Prueba(models.Model):
+    quantity = models.IntegerField(default = 0, null = True, blank = True)
+
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, blank = True, null = True)
