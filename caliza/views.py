@@ -7,7 +7,7 @@ from django.contrib import messages
 import json
 import datetime
 from .models import *
-from . utils import cookieCart, cartData, guestOrder, individualPurchase, wishListData
+from . utils import cookieCart, cartData, guestOrder, individualPurchase
 from . forms import SignInUserForm
 
 # Import pagination stuff
@@ -17,14 +17,22 @@ from django.core.paginator import Paginator
 def store(request):
     # print(request.user.is_authenticated)
     dataCart = cartData(request)
-    dataWishList = wishListData(request)
     cartItems = dataCart['cartItems']
-    wishListItems = dataWishList['wishListItems']
+    customer = dataCart['customer']
+    
+    try:
+        
+        productsWishList = GetProducts.objects.get(customer = customer)
+    
+    except:
+        
+        productsWishList = {}
+
     products = Product.objects.all()[:6]
     
     if request.user.is_authenticated:
         
-        context = {'products': products, 'wishListItems': wishListItems, 'cartItems': cartItems}
+        context = {'products': products, 'productsWishList': productsWishList, 'cartItems': cartItems}
         
     else:
         
@@ -42,12 +50,28 @@ def cart(request):
     return render(request, 'caliza/cart.html', context)
 
 def wishList(request):
-    data = wishListData(request)
-    wishListItems = data['wishListItems']
-    order = data['order']
-    items = data['items']
-
-    context = {'items': items, 'order': order, 'wishListItems': wishListItems}
+    
+    customer = request.user.customer
+    
+    products = GetProducts.objects.filter(customer = customer).values()
+    
+    productos = {}
+    
+    for i in range(len(products)):
+        productId = products[i]['product_id']
+        producto = Product.objects.get(id = productId)
+    
+        for i in range(len(products)):
+            productos[i] = producto
+            data = productos[i]
+            
+    #print(products[0]['product_id'])
+    
+    #producto = Product.objects.filter(id = products[0])
+    
+    #print(producto.name)
+    print(productos)
+    context = {'products': data}
     return render(request, 'caliza/wishList.html', context)
 
 def loginUser(request):
@@ -233,6 +257,23 @@ def updateItem(request):
 
     if orderItem.quantity <= 0:
         orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)
+
+def updateWishList(request):
+    data = json.loads(request.body)
+    print(data)
+    productId = data['productId']
+    action = data['action']
+
+    print('Action: ', action)
+    print('Product id: ', productId)
+    
+    customer = request.user.customer
+    product = Product.objects.get(id = productId)
+    productsList, created = GetProducts.objects.get_or_create(customer = customer, product = product)
+
+    productsList.save()
 
     return JsonResponse('Item was added', safe=False)
 
