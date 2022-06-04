@@ -87,6 +87,11 @@
                             <h4 class="precio">${{product.price|floatformat:2}}</h4>
                         </div>
                     </div>
+                    <script>
+                        console.dir("{{products}}");
+                        console.dir("{{product}}");    
+                        console.log(typeof("{{product}}"));    
+                    </script>
                 {% endfor %}
             </div>
         </div>

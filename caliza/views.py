@@ -53,25 +53,31 @@ def wishList(request):
     
     customer = request.user.customer
     
+    #Devolver productos:
     products = GetProducts.objects.filter(customer = customer).values()
     
-    productos = {}
+    #Diccionario que se enviará al HTML
+    producto = []
     
     for i in range(len(products)):
+        #Obtenemos el id de cada producto en el diccionario products
         productId = products[i]['product_id']
-        producto = Product.objects.get(id = productId)
+
+        #Traemos de la BD el producto con el id del renglón anterior
+        producto.append(Product.objects.get(id = productId)) 
+
+    #print('Producto: ', producto)
+
+    for i in range(len(producto)):
+        
+        print(producto[i].price)
+
     
-        for i in range(len(products)):
-            productos[i] = producto
-            data = productos[i]
-            
-    #print(products[0]['product_id'])
+
     
-    #producto = Product.objects.filter(id = products[0])
-    
-    #print(producto.name)
-    print(productos)
-    context = {'products': data}
+    #print('Producto: ', dict(producto))
+
+    context = {'products': producto}
     return render(request, 'caliza/wishList.html', context)
 
 def loginUser(request):
