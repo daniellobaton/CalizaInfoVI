@@ -290,11 +290,8 @@ def deleteItems(request):
     product = Product.objects.get(id = productId)
     order, created = Order.objects.get_or_create(customer = customer, complete = False)
     orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)
-    orderItem.quantity -= 1
-    orderItem.save()
-
-    if orderItem.quantity <= 0:
-        orderItem.delete()
+   
+    orderItem.delete()
 
     return JsonResponse('Item was added', safe=False)
 

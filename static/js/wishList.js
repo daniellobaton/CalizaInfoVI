@@ -52,7 +52,7 @@ for(let i = 0; i < updateWishList.length; i++){
         
         if(user !== 'AnonymousUser') {
 
-            updateUserOrder(productId, action);
+            update(productId, action);
 
         }
 
@@ -100,7 +100,7 @@ for(let i = 0; i < updateWishList.length; i++){
 // }
 
 
-function updateUserOrder(productId, action){
+function update(productId, action){
 
     var url = '/update_wishList/';
 
