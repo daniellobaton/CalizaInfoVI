@@ -17,5 +17,55 @@
 
     </script>
 
+    <!--section-title -->
+    <div class="row">
+        <div class="col text-center">
+          <h1 class="display-4 text-uppercase text-dark mb-0">
+            <strong>first carousel</strong>
+          </h1>
+          <div class="title-underline bg-warning"></div>
+          <p class="mt-2 text-capitalize text-muted">Lorem ipsum dolor sit amet.</p>
+        </div>
+
+    </div>
+      <!-- end of section-title -->
+    <div class="row">
+        <div class="col-md-8 mx-auto text-center">
+          <div id="example" class="carousel slide" data-ride='carousel'>
+            <!-- indicators -->
+            <ul class="carousel-indicators">
+              <li data-target="#example" data-slide-to='0' class="active"></li>
+              <li data-target="#example" data-slide-to='1'></li>
+              <li data-target="#example" data-slide-to='2'></li>
+              <li data-target="#example" data-slide-to='3'></li>
+            </ul>
+            <!-- images -->
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img src="img/projects-1.jpeg" alt="project" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="img/projects-2.jpeg" alt="project" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="img/projects-3.jpeg" alt="project" class="d-block w-100">
+              </div>
+              <div class="carousel-item">
+                <img src="img/projects-4.jpeg" alt="project" class="d-block w-100">
+              </div>
+            </div>
+            <!-- end of images -->
+            <!-- controls -->
+            <a href="#example" class="carousel-control-prev" data-slide="prev">
+              <span class="carousel-control-prev-icon"></span>
+            </a>
+            <a href="#example" class="carousel-control-next" data-slide="next">
+              <span class="carousel-control-next-icon"></span>
+            </a>
+
+          </div>
+        </div>
+    </div>
+
 
 {% endblock content %}
