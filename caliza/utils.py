@@ -7,7 +7,6 @@ def cookieCart(request):
         cart = json.loads(request.COOKIES['cart'])
     except:
         cart = {}
-    print('Cart: ', cart)
     items = []
     order = {'getCartTotal': 0, 'getCartItems': 0, 'shipping': False}
     cartItems = order['getCartItems']
@@ -58,11 +57,55 @@ def cartData(request):
     else:
         cookieData = cookieCart(request)
         cartItems = cookieData['cartItems']
+        customer = None
+        
         order = cookieData['order']
         items = cookieData['items']
 
+    return {'cartItems': cartItems, 'order': order, 'items': items, 'customer': customer}
 
-    return {'cartItems': cartItems, 'order': order, 'items': items}
+# def wishListData(request):
+    
+#     if request.user.is_authenticated:
+#         customer = request.user.customer
+#         request.product
+#         print(f"items de wishlist: {wishListItems}")
+
+    # return {'order': order, 'wishListItems': wishListItems}
+
+def individualPurchase(request):
+    if request.user.is_authenticated:
+        productId = request.GET['producto']
+        product = Product.objects.get(id = productId)
+        cantidad = request.GET['cantidad']
+        total = int(product.price) * cantidad
+        #print('producto: ', product)
+        customer = request.user.customer
+        order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        
+    else:
+        productId = request.GET['producto']
+        product = Product.objects.get(id = productId)
+        cantidad = request.GET['cantidad']
+        total = int(product.price) * cantidad
+        order = {}
+
+    item = {
+            'product':{
+                'id': product.id,
+                'name': product.name,
+                'price': product.price,
+                'imageURL': product.imageURL,
+            },
+            'quantity': cantidad,
+            'getTotal': total
+    }
+
+    #if product.digital == False:
+      #  order['shipping'] = True
+
+    return {'item': item, 'order': order}
+    #return {'order': order}
 
 
 def guestOrder(request, data):
@@ -97,3 +140,23 @@ def guestOrder(request, data):
         )
 
     return customer, order
+
+
+def borraItemCarrito(request):
+    if request.user.is_authenticated:
+        print('Usuario autenticado')
+        # productId = request.GET['producto']
+        # product = Product.objects.get(id = productId)
+        # cantidad = request.GET['cantidad']
+        # total = int(product.price) * cantidad
+        # #print('producto: ', product)
+        # customer = request.user.customer
+        # order, created = Order.objects.get_or_create(customer = customer, complete = False)
+        
+    else:
+        print('Usuario no autenticado')
+        # productId = request.GET['producto']
+        # product = Product.objects.get(id = productId)
+        # cantidad = request.GET['cantidad']
+        # total = int(product.price) * cantidad
+        # order = {}

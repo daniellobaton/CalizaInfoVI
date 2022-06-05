@@ -1,17 +1,17 @@
 {% extends 'caliza/index.html' %}
 {% load static %}
 {% block content %}
-    <div class="row">
+    <div class="row" style="margin-right: 0px;margin-left: 0px; padding: 2rem;">
         <div class="col-lg-6">
             <div class="box-element" id="form-wrapper">
                 <form action="" id="form">
                     {% csrf_token %}
                     <div id="user-info">
 						<div class="form-field">
-							<input required class="form-control" type="text" name="name" placeholder="Nombre..">
+							<input required class="form-control" type="text" name="name" placeholder="Nombre...">
 						</div>
 						<div class="form-field">
-							<input required class="form-control" type="email" name="email" placeholder="Email..">
+							<input required class="form-control" type="email" name="email" placeholder="Email...">
 						</div>
 					</div>
 					
@@ -43,7 +43,8 @@
 
             <div class="box-element hidden p-4" id="payment-info">
                 <small>Paypal options</small>
-                <button id="make-payment">Pagar</button>
+                <div id="paypal-button-container"></div>
+                <!-- <button id="make-payment">Pagar</button> -->
             </div>
         </div>
 
@@ -56,26 +57,85 @@
                 <h3>Resumen de compra</h3>
 
                 <hr>
-                {% for item in items %}
-                <div class="cart-row">
-					<div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
-					<div style="flex:2"><p>{{item.product.name}}</p></div>
-					<div style="flex:1"><p>{{item.product.price}}</p></div>
-					<div style="flex:1"><p>{{item.quantity}}</p></div>
-				</div>
-                {% endfor %}
-				<h5>Productos:   {{order.getCartItems}}</h5>
-				<h5>Total:   {{order.getCartTotal|floatformat:2}}</h5>
+                {% if iterable %}
+                    {% for item in items %}
+                    <div class="cart-row">
+                        <div style="flex:2"><img class="row-image" src="{{item.product.imageURL}}"></div>
+                        <div style="flex:2"><p>{{item.product.name}}</p></div>
+                        <div style="flex:1"><p>${{item.product.price}}</p></div>
+                        <div style="flex:1"><p>{{item.quantity}}</p></div>
+                    </div>
+                    
+                    {% endfor %}
+                    <h5>Productos:   {{order.getCartItems}}</h5>
+                    <h5>Total:   {{order.getCartTotal|floatformat:2}}</h5>
+                    <script>
+                        var total = '{{order.getCartTotal|floatformat:2}}';
+                    </script>
+                {% else %}
+                    <div class="cart-row">
+                        <div style="flex:2"><img class="row-image" src="{{items.imageURL}}"></div>
+                        <div style="flex:2"><p>{{items.name}}</p></div>
+                        <div style="flex:1"><p>${{items.price}}</p></div>
+                        <div style="flex:1"><p>{{quantity}}</p></div>
+                    </div>
+                    <h5>Productos:   {{quantity}}</h5>
+				    <h5>Total:   ${{total}}</h5>
+
+                    <script>
+                        var total = '{{total}}';
+                    </script>
+                {% endif %}
+				
 
             </div>
         </div>
     </div>
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AbaTcp9K1UUUi1F2Z2Dwr6G1qyBVQLHjPou6TPPEEHhtFjW8swav1OQnaMg_9UMafoFNz17he1XJW9gv&currency=USD"></script>
+
+    <script>
+
+        //let total = '{{order.getCartTotal|floatformat:2}}';
+
+        paypal.Buttons({
+
+            //Crear transacción
+            createOrder: function(data, actions){
+
+                return actions.order.create({
+
+                    purchase_units: [{
+
+                        amount: {
+
+                            value: parseFloat(total).toFixed(2)
+
+                        }
+
+                    }]
+
+                });
+
+            },
+            //Finalizar transacción
+            onApprove: function(data, actions){
+
+                return actions.order.capture().then(function(details){
+
+                    submitFormData();
+
+                });
+                    
+            }
+
+        }).render('#paypal-button-container');
+
+    </script>
+
     <script type="text/javascript">
 
         let shipping = '{{order.shipping}}';
-
-        let total = '{{order.getCartTotal|floatformat:2}}';
 
         if(shipping == 'False'){
 
@@ -114,11 +174,11 @@
 
         });
 
-        document.getElementById('make-payment').addEventListener('click', function(e){
+        /*document.getElementById('make-payment').addEventListener('click', function(e){
 
             submitFormData();
 
-        });
+        });*/
 
         function submitFormData(){
 

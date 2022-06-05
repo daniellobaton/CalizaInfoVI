@@ -1,0 +1,16 @@
+@use 'base/variables' as v;
+
+.link-secciones{
+
+    text-decoration: none;
+    color: v.$principal;
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.subrayado{
+
+    text-decoration: overline;
+    text-decoration-style: double;
+
+}

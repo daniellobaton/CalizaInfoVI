@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-f9l_p==57mq=-fl2^72jl%qjs3ls6sv9%=ih9@m%yj0@(j@+_w
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['18.224.82.189', 'ec2-18-224-82-189.us-east-2.compute.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1', '18.224.82.189', 'ec2-18-224-82-189.us-east-2.compute.amazonaws.com']
 
 
 # Application definition
@@ -37,7 +37,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.facebook',
+    'allauth.socialaccount.providers.google',
     'caliza.apps.CalizaConfig',
 ]
 
@@ -56,7 +62,7 @@ ROOT_URLCONF = 'ecommerce.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,3 +137,26 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'static/img')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend'
+]
+
+SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    }
+}
+
+SITE_ID = 1
+
+LOGIN_REDIRECT_URL = '/signIn/'
+LOGOUT_REDIRECT_URL = '/'
+

@@ -1,0 +1,46 @@
+{% extends 'caliza/index.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Script para modificar el sibrayado de las secciones -->
+<script>
+
+    let linkSubrayado = document.getElementsByClassName('link-secciones');
+
+    for(let i = 0; i < linkSubrayado.length; i++){
+
+        linkSubrayado[i].classList.remove("subrayado");
+
+    }
+
+    document.getElementById('seccion-mas-vendidos').classList.add('subrayado');
+
+</script>
+
+<!-- Los más vendidos -->
+<div class="row" style="margin-right: 0px;margin-left: 0px;">
+    <div class="col p-5">
+        <div class="row">
+            <div class="col">
+                <h2 class="text-center mb-4">Los más vendidos</h2>
+            </div>
+        </div>
+        <div class="row">
+            {% for product in products %}
+                <div class="col-4">
+                    <img class="thumbnail" src="{{product.imageURL}}" alt="Placeholder">
+                    <div class="box-element product">
+                        <h6><strong>{{product.name}}</strong></h6>
+                        <hr>
+                        <a data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</a>
+                        <a class="btn btn-outline-success" type="submit" href="{% url 'individual_product' %}?producto={{product.id}}">Ver</a>
+
+                        <h4 class="precio">${{product.price|floatformat:2}}</h4>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

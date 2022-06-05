@@ -13,6 +13,7 @@
     integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
   <!-- normalize.css -->
   <link rel="stylesheet" type="text/css" href="{% static 'css/externas/normalize.css' %}">
   <!-- Hoja de estilos propia -->
@@ -88,9 +89,9 @@
 <body>
 
   <nav class="navbar navbar-expand-lg fondo-principal navbar-light
-   shadow p-1 mb-5 rounded">
+   shadow p-1 mb-3 rounded">
     <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'store' %}"><img src="../../../static/img/logoCalizaPequeno.webp" alt=""></a>
+      <a class="navbar-brand" href="{% url 'store' %}"><img src="{% static 'img/logoCalizaPequeno.webp' %}" alt=""></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -102,17 +103,58 @@
         </ul>
         
         <div class="form-inline my-2 my-lg-0">
-          <a href="#"class="btn btn-warning">Iniciar sesión</a>
-          <i id="cart-icon" class="fas fa-heart"></i>
+          {% if user %}
+            <div class="d-flex">
+            <a href="{% url 'wishList' %}">
+              <img  id="cart-icon" src="{% static 'img/like.webp' %}">
+            </a>
+            <li class="nav-item dropdown">
+              <a class="nav-link d-inline px-0 dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="{% static 'img/user.png' %}">
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            {% comment %} <p>{{user.email}}</p> {% endcomment %}
+          {% else %}
+            <a href="{% url 'loginUser' %}"class="btn btn-warning">Iniciar sesión</a>
+          {% endif %}
           <a href="{% url 'cart' %}">
            <img  id="cart-icon" src="{% static 'img/cart.webp' %}">
           </a>
           <p id="cart-total">{{cartItems}}</p>
+        </div>
       </div>
     </div>
   </nav>
 
-  <div class="container">
+  <div class="container-fluid mb-2">
+    <div class="row">
+
+      <div id="seccion-inicio" class="col-3 text-center">
+        <a class="link-secciones subrayado" href="{% url 'store' %}">Inicio</a>
+      </div>
+
+      <div id="seccion-nuestros-productos" class="col-3 text-center">
+        <a class="link-secciones" href="{% url 'ourProducts' %}">Nuestros productos</a>
+      </div>
+
+      <div id="seccion-promos" class="col-3 text-center">
+        <a class="link-secciones" href="{% url 'promos' %}">Promociones</a>
+      </div>
+
+      <div id="seccion-mas-vendidos" class="col-3 text-center">
+        <a class="link-secciones" href="{% url 'masVendidos' %}">Más vendidos</a>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="container-fluid" style="padding: 0;">
 
     {% block content %}
 
@@ -166,6 +208,7 @@
   </script>
 
   <script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+  <script type="text/javascript" src="{% static 'js/wishList.js' %}"></script>
 
 </body>
 

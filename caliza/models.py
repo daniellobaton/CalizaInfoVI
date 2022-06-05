@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 class Customer(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE, null = True, blank = True)
+    user = models.OneToOneField(User, on_delete = models.CASCADE, related_name = 'customer', null = True, blank = True)
     name = models.CharField(max_length = 80, null = True)
     email = models.CharField(max_length = 50, null = True)
 
@@ -12,11 +12,14 @@ class Customer(models.Model):
 
 class Product(models.Model):
     name = models.CharField(max_length = 80, null = True)
-    price = models.DecimalField(max_digits = 7, decimal_places = 2)
+    price = models.IntegerField()
     digital = models.BooleanField(default = False, null = True, blank = False)
     image = models.ImageField(null = True, blank = True)
+    description = models.TextField(default = "")
+    categoria = models.CharField(max_length=8, null=True)
 
     def __str__(self):
+            
         return self.name
         
     @property
@@ -57,6 +60,13 @@ class Order(models.Model):
         total = sum([item.quantity for item in orderItems])
         return total
 
+class GetProducts(models.Model):
+    customer = models.ForeignKey(Customer, on_delete = models.SET_NULL, blank = True, null = True)
+    product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
+    
+    def __str__(self):
+        return str(self.id)
+       
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, blank = True, null = True)
