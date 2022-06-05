@@ -219,7 +219,7 @@ def individualProduct(request):
     items = data['items']
 
     context = {'items': items, 'order': order, 'cartItems': cartItems, 'producto': product}
-    return render(request, 'caliza/individualProduct.html', context)    
+    return render(request, 'caliza/individualProduct.html', context)
 
 def promos(request):
     data = cartData(request)
