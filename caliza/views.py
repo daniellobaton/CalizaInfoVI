@@ -40,6 +40,9 @@ def store(request):
     
     return render(request, 'caliza/store.html', context)
 
+def user(request):
+    return render(request, 'caliza/user.html')
+
 def cart(request):
     data = cartData(request)
     cartItems = data['cartItems']
