@@ -26,7 +26,7 @@ function versionWebP(done){
 
     };
 
-    src('src/img/**/*.{png,jpg,PNG}')
+    src('src/img/**/*.{png,jpg,PNG,jpeg}')
         .pipe(webp(opciones))
         .pipe(dest('imgWebp'));
 

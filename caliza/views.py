@@ -227,7 +227,9 @@ def promos(request):
     order = data['order']
     items = data['items']
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems}
+    productos = Oferta.objects.all()[:5]
+
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'productos': productos}
     return render(request, 'caliza/promos.html', context)  
 
 def masVendidos(request):
