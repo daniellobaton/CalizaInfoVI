@@ -48,6 +48,9 @@ def store(request):
     
     return render(request, 'caliza/store.html', context)
 
+def user(request):
+    return render(request, 'caliza/user.html')
+
 def querySingleton():
     
     singleton = Settings.objects.get(id = 1)
