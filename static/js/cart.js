@@ -1,8 +1,6 @@
 let updateBtns = document.getElementsByClassName('update-cart');
 let deleteBtns = document.getElementsByClassName('delete-cart');
 
-console.log(deleteBtns);
-
 for(let i = 0; i < deleteBtns.length; i++){
 
     console.log(deleteBtns);

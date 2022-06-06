@@ -1,3 +1,4 @@
+from itertools import product
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -66,7 +67,14 @@ class GetProducts(models.Model):
     
     def __str__(self):
         return str(self.id)
-       
+
+class Oferta(models.Model):
+    product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
+    precioDescuento = models.IntegerField()
+
+    def __str__(self):
+        return str(self.id)
+
 class OrderItem(models.Model):
     product = models.ForeignKey(Product, on_delete = models.SET_NULL, blank = True, null = True)
     order = models.ForeignKey(Order, on_delete = models.SET_NULL, blank = True, null = True)
@@ -89,3 +97,15 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+    
+class SingletonModel(models.Model):
+    def save(self, *args, **kwargs):
+        
+        self.pk = 1
+        super().save(*args, **kwargs)
+    
+class Settings(SingletonModel):
+    customer = models.ForeignKey(Customer, on_delete = models.SET_NULL, null = True)
+    
+    def _str_(self):
+        return str(self.id)
