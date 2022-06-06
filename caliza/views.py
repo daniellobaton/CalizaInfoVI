@@ -117,6 +117,10 @@ def loginUser(request):
     context = {'form': form}
     return render(request, 'caliza/loginUser.html', context)
 
+def logoutUser(request):
+    logout(request)
+    return redirect('store')
+
 def signIn(request):
     
     # ultimoCustomer = Customer.objects.all().order_by('-id')[0]
