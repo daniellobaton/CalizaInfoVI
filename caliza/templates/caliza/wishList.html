@@ -26,7 +26,7 @@
                         <div style="flex:2;">${{product.price|floatformat:2}}</div>
                         <div style="flex:2;">
                             <a data-product={{product.id}} class="btn add-btn">
-                                <img id="cart-icon" src="{% static 'img/shopping-cart.webp' %}">
+                                <img id="cart-icon" id="cart-icon" data-product="{{product.id}}" data-action="add" class="add-btn update-cart" src="{% static 'img/shopping-cart.webp' %}">
                             </a>
                         </div>
                         <div style="flex:1;">
@@ -35,11 +35,7 @@
                             </a>
                         </div>
                     </div>
-                    <script>
-                        console.dir("{{products}}");
-                        console.dir("{{product}}");    
-                        console.log(typeof("{{product}}"));    
-                    </script>
+
                 {% endfor %} 
 
             </div>

@@ -1,8 +1,6 @@
 let updateBtns = document.getElementsByClassName('update-cart');
 let deleteBtns = document.getElementsByClassName('delete-cart');
 
-console.log(deleteBtns);
-
 for(let i = 0; i < deleteBtns.length; i++){
 
     console.log(deleteBtns);
@@ -67,6 +65,9 @@ for(let i = 0; i < updateBtns.length; i++){
 
         let productId = this.dataset.product;
         let action = this.dataset.action;
+
+        console.log('id del producto:', productId);
+        console.log('Acción:', action);
 
         console.log('productId: ', productId, 'action: ', action);
 
