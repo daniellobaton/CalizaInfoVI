@@ -19,6 +19,8 @@ def store(request):
     dataCart = cartData(request)
     cartItems = dataCart['cartItems']
     customer = dataCart['customer']
+    # userSingleton = Settings.objects.all()
+    # print(userSingleton)
     
     try:
         
@@ -32,7 +34,13 @@ def store(request):
     
     if request.user.is_authenticated:
         
-        context = {'products': products, 'productsWishList': productsWishList, 'cartItems': cartItems}
+        Settings.objects.filter(id = 1).delete()
+        customerSingleton = request.user.customer
+        singleton = Settings.objects.create(customer = customerSingleton)
+        singleton.save()
+        # print("singleton:", singleton.customer)
+        # print("userSingleton:", userSingleton)
+        context = {'products': products, 'productsWishList': productsWishList, 'cartItems': cartItems, 'singleton': singleton.customer}
         
     else:
         
@@ -112,6 +120,7 @@ def signIn(request):
             name = ultimoUser.username,
             email = ultimoUser.email
         )
+        
         return redirect('store')
         # isAuthenticated = True
     
