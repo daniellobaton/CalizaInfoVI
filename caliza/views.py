@@ -58,6 +58,10 @@ def cart(request):
     return render(request, 'caliza/cart.html', context)
 
 def wishList(request):
+    data = cartData(request)
+    cartItems = data['cartItems']
+    order = data['order']
+    items = data['items']
     
     customer = request.user.customer
     
@@ -74,7 +78,7 @@ def wishList(request):
         #Traemos de la BD el producto con el id del renglón anterior
         producto.append(Product.objects.get(id = productId)) 
 
-    context = {'products': producto}
+    context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': producto}
     return render(request, 'caliza/wishList.html', context)
 
 def loginUser(request):
