@@ -66,17 +66,6 @@ def wishList(request):
         #Traemos de la BD el producto con el id del renglón anterior
         producto.append(Product.objects.get(id = productId)) 
 
-    #print('Producto: ', producto)
-
-    for i in range(len(producto)):
-        
-        print(producto[i].price)
-
-    
-
-    
-    #print('Producto: ', dict(producto))
-
     context = {'products': producto}
     return render(request, 'caliza/wishList.html', context)
 
@@ -268,6 +257,18 @@ def updateItem(request):
 
     return JsonResponse('Item was added', safe=False)
 
+def deleteItems(request):
+    data = json.loads(request.body)
+    productId = data['productId']
+    customer = request.user.customer
+    product = Product.objects.get(id = productId)
+    order, created = Order.objects.get_or_create(customer = customer, complete = False)
+    orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)
+   
+    orderItem.delete()
+
+    return JsonResponse('Item was added', safe=False)
+
 def updateWishList(request):
     data = json.loads(request.body)
     print(data)
@@ -285,17 +286,18 @@ def updateWishList(request):
 
     return JsonResponse('Item was added', safe=False)
 
-def deleteItems(request):
+def deleteWishListItem(request):
     data = json.loads(request.body)
+    print(data)
     productId = data['productId']
-    customer = request.user.customer
-    product = Product.objects.get(id = productId)
-    order, created = Order.objects.get_or_create(customer = customer, complete = False)
-    orderItem, created = OrderItem.objects.get_or_create(order = order, product = product)
-   
-    orderItem.delete()
+    iteration = data['iteration']
 
-    return JsonResponse('Item was added', safe=False)
+    registro = GetProducts.objects.filter(id=iteration)
+    #print(registro)
+
+    registro.delete()
+
+    return JsonResponse('Item was deleted', safe=False)
 
 #from django.views.decorators.csrf import csrf_exempt
 #@csrf_exempt
