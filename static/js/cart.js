@@ -66,9 +66,6 @@ for(let i = 0; i < updateBtns.length; i++){
         let productId = this.dataset.product;
         let action = this.dataset.action;
 
-        console.log('id del producto:', productId);
-        console.log('Acción:', action);
-
         console.log('productId: ', productId, 'action: ', action);
 
         console.log('User: ', user);
