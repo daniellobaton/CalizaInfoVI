@@ -97,3 +97,15 @@ class ShippingAddress(models.Model):
 
     def __str__(self):
         return self.address
+    
+class SingletonModel(models.Model):
+    def save(self, *args, **kwargs):
+        
+        self.pk = 1
+        super().save(*args, **kwargs)
+    
+class Settings(SingletonModel):
+    customer = models.ForeignKey(Customer, on_delete = models.SET_NULL, null = True)
+    
+    def _str_(self):
+        return str(self.id)

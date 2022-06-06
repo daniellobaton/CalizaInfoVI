@@ -1,3 +1,4 @@
+from msilib.schema import Class
 from django.contrib import admin
 
 # Register your models here.
@@ -10,3 +11,7 @@ admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
 admin.site.register(GetProducts)
 admin.site.register(Oferta)
+
+@admin.register(Settings)
+class SettingsAdmin(admin.ModelAdmin):
+    pass
