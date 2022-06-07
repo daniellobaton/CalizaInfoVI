@@ -52,20 +52,20 @@
             {% csrf_token %}
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img id="cart-icon" src="{% static 'img/email.webp' %}">
+                <img src="{% static 'img/user.png' %}">
               </span>
               <input type="text" name="username" class="form-control" id="exampleInputUser" placeholder="Nombre de usuario">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img id="cart-icon" src="{% static 'img/lock.webp' %}">
+                <img src="{% static 'img/lock24.webp' %}">
               </span>
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
             </div>
             <div class="d-grid gap-2 mx-auto">
               <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </div>
-            <a href="#">¿Has olvidado la contraseña?</a>
+            {% comment %} <a href="#">¿Has olvidado la contraseña?</a> {% endcomment %}
             <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
           </form>
         </div>
