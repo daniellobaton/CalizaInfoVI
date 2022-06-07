@@ -51,6 +51,7 @@ def store(request):
 def userProfile(request):
     
     if request.method == "POST":
+        
         userForm = UserUpdateForm(request.POST, instance=request.user)
         
         if userForm.is_valid():
@@ -59,7 +60,7 @@ def userProfile(request):
         
     else: 
         
-        userForm = UserUpdateForm()
+        userForm = UserUpdateForm(instance=request.user)
     
     context = {'userForm': userForm}
     return render(request, 'caliza/userProfile.html', context)
