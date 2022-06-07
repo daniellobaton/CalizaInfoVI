@@ -8,7 +8,7 @@ import json
 import datetime
 from .models import *
 from . utils import cookieCart, cartData, guestOrder, individualPurchase
-from . forms import SignInUserForm
+from . forms import SignInUserForm, UserUpdateForm
 
 # Import pagination stuff
 from django.core.paginator import Paginator
@@ -48,7 +48,7 @@ def store(request):
     
     return render(request, 'caliza/store.html', context)
 
-def user(request):
+def userProfile(request):
     return render(request, 'caliza/user.html')
 
 def querySingleton():
