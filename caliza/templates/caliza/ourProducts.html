@@ -89,6 +89,11 @@
                     <img src="{{product.imageURL}}" class="img-fluid thumbnail">
                     <div class="box-element product">
                         <h5><strong>{{product.name}}</strong></h5>
+                        {% if singleton %}
+                            <a class="btn update-wish-list" data-productwishlist={{product.id}} data-actionwishlist="addWishList">
+                                <img id="cart-icon" src="{% static 'img/like.webp' %}">
+                            </a>
+                        {% endif %}
                         <h5 style="display: none;" class="categoria">{{product.categoria}}</h5>
                         <hr>
                         <h5 class="precio">${{product.price}}</h5>

@@ -52,13 +52,13 @@
             {% csrf_token %}
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img src="{% static 'img/email.webp' %}">
+                <img id="cart-icon" src="{% static 'img/email.webp' %}">
               </span>
               <input type="text" name="username" class="form-control" id="exampleInputUser" placeholder="Nombre de usuario">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img src="{% static 'img/lock.webp' %}">
+                <img id="cart-icon" src="{% static 'img/lock.webp' %}">
               </span>
               <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
             </div>
