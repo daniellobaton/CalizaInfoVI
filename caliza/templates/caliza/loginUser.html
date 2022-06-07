@@ -47,7 +47,7 @@
               <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Continuar con Google">
             </div>
           </form> {% endcomment %}
-          <p class="text-center">o</p>
+          {% comment %} <p class="text-center">o</p> {% endcomment %}
           <form method="POST" action="" id="login-form">
             {% csrf_token %}
             <div class="input-group mb-3">
@@ -66,7 +66,7 @@
               <button type="submit" class="btn btn-primary">Iniciar sesión</button>
             </div>
             {% comment %} <a href="#">¿Has olvidado la contraseña?</a> {% endcomment %}
-            <p>¿No tienes una cuenta? <a href="#">Regístrate</a></p>
+            <p>¿No tienes una cuenta? <a href="{% url 'signIn' %}">Regístrate</a></p>
           </form>
         </div>
       </div>
