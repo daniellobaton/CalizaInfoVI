@@ -30,11 +30,17 @@
                 <div class="col-4">
                     <img class="thumbnail" src="{{product.imageURL}}" alt="Placeholder">
                     <div class="box-element product">
-                        <h6><strong>{{product.name}}</strong></h6>
+                        <div class="d-flex justify-content-between">
+                            <h6><strong>{{product.name}}</strong></h6>
+                            {% if singleton %}
+                                <a class="btn update-wish-list" data-productwishlist={{product.id}} data-actionwishlist="addWishList">
+                                    <img id="cart-icon" src="{% static 'img/like.webp' %}">
+                                </a>
+                            {% endif %}
+                        </div>
                         <hr>
                         <a data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Añadir al carrito</a>
                         <a class="btn btn-outline-success" type="submit" href="{% url 'individual_product' %}?producto={{product.id}}">Ver</a>
-
                         <h4 class="precio">${{product.price|floatformat:2}}</h4>
                     </div>
                 </div>

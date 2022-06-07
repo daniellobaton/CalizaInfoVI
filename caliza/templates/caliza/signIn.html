@@ -42,13 +42,13 @@
           <h3 class="text-center">Registrarme</h3>
           <form action="{% url 'signIn' %}" method="POST">
             {% csrf_token %}
-            <div class="mb-3">
-              <a href="{% provider_login_url 'google' method = 'oauth2' %}">Iniciar con Google</a>
+            <div class="mb-3 d-grid gap-2 mx-auto">
+              <a class="btn btn-outline-primary" href="{% provider_login_url 'google' method = 'oauth2' %}">   
+                <img src="{% static 'img/google32.webp' %}">
+                <span>Iniciar con Google</span>
+              </a>
             </div>
-            {% comment %} <div class="mb-3">
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Continuar con Google">
-            </div> {% endcomment %}
-          <p class="text-center">o</p>
+            <p class="text-center">o</p>
             <div class="input-group mb-3">
                 <span class="input-group-text" id="basic-addon1">
                   <img src="{% static 'img/user.png' %}">
@@ -57,19 +57,19 @@
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img src="{% static 'img/email.webp' %}">
+                <img src="{% static 'img/email24.webp' %}">
               </span>
               <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img src="{% static 'img/lock.webp' %}">
+                <img src="{% static 'img/lock24.webp' %}">
               </span>
               <input type="password" name="password1" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="basic-addon1">
-                <img src="{% static 'img/lock.webp' %}">
+                <img src="{% static 'img/lock24.webp' %}">
               </span>
               <input type="password" name="password2" class="form-control" id="exampleInputPassword2" placeholder="Repite tu contraseña">
             </div>
