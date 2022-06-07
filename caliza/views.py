@@ -76,9 +76,16 @@ def cart(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    singleton = querySingleton()
     
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'singleton': singleton}
+    if request.user.is_authenticated:
+        
+        singleton = querySingleton()
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'singleton': singleton}
+        
+    else:
+        
+        context = {'items': items, 'order': order, 'cartItems': cartItems}
+
     return render(request, 'caliza/cart.html', context)
 
 def wishList(request):
@@ -86,7 +93,6 @@ def wishList(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    singleton = querySingleton()
     customer = request.user.customer
     
     #Devolver productos:
@@ -102,7 +108,15 @@ def wishList(request):
         #Traemos de la BD el producto con el id del renglón anterior
         producto.append(Product.objects.get(id = productId)) 
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': producto, 'singleton': singleton}
+    if request.user.is_authenticated:
+        
+        singleton = querySingleton()
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': producto, 'singleton': singleton}
+    
+    else:
+        
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'products': producto}
+
     return render(request, 'caliza/wishList.html', context)
 
 def loginUser(request):
@@ -136,6 +150,7 @@ def loginUser(request):
 
 def logoutUser(request):
     logout(request)
+    Settings.objects.filter(id=1).delete()
     return redirect('store')
 
 def signIn(request):
@@ -187,8 +202,6 @@ def signIn(request):
     return render(request, 'caliza/signIn.html', context)
 
 def checkout(request):
-    
-    singleton = querySingleton()
 
     if request.GET:
         productId = request.GET['producto']
@@ -206,7 +219,13 @@ def checkout(request):
         datos = individualPurchase(request)
         order = datos['order'] 
 
-        context = {'items': producto, 'quantity': cantidad, 'iterable': iterable, 'total': total, 'order': order, 'singleton': singleton}
+        if request.user.is_authenticated:
+            
+            singleton = querySingleton()
+            context = {'items': producto, 'quantity': cantidad, 'iterable': iterable, 'total': total, 'order': order, 'singleton': singleton}
+        else:
+            context = {'items': producto, 'quantity': cantidad, 'iterable': iterable, 'total': total, 'order': order}
+
     else:
 
         data = cartData(request)
@@ -215,7 +234,12 @@ def checkout(request):
         items = data['items'] #arreglo con los productos del carrito
         iterable = True
 
-        context = {'items': items, 'order': order, 'cartItems': cartItems, 'iterable': iterable, 'singleton': singleton}
+        if request.user.is_authenticated:
+            
+            singleton = querySingleton()
+            context = {'items': items, 'order': order, 'cartItems': cartItems, 'iterable': iterable, 'singleton': singleton}
+        else:
+            context = {'items': items, 'order': order, 'cartItems': cartItems, 'iterable': iterable}
 
     return render(request, 'caliza/checkout.html', context)
 
@@ -223,7 +247,6 @@ def ourProducts(request):
 
     hayCategoria = False
     categoria = None
-    singleton = querySingleton()
 
     if request.GET:
         hayCategoria = True
@@ -238,7 +261,15 @@ def ourProducts(request):
     products = pagination.get_page(page)
     nums = "a" * products.paginator.num_pages
     
-    context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems, 'hayCategoria': hayCategoria, 'categoria': categoria, 'singleton': singleton}
+    if request.user.is_authenticated:
+            
+        singleton = querySingleton()
+        context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems, 'hayCategoria': hayCategoria, 'categoria': categoria, 'singleton': singleton}
+    
+    else: 
+        
+        context = {'productsList': productsList, 'products': products, 'nums': nums, 'cartItems': cartItems, 'hayCategoria': hayCategoria, 'categoria': categoria}
+
     return render(request, 'caliza/ourProducts.html', context)
     
 def individualProduct(request):
@@ -250,9 +281,16 @@ def individualProduct(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    singleton = querySingleton()
+    
+    if request.user.is_authenticated:
+            
+        singleton = querySingleton()
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'producto': product, 'singleton': singleton}
+    
+    else:
+        
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'producto': product}
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'producto': product, 'singleton': singleton}
     return render(request, 'caliza/individualProduct.html', context)
 
 def promos(request):
@@ -260,11 +298,18 @@ def promos(request):
     cartItems = data['cartItems']
     order = data['order']
     items = data['items']
-    singleton = querySingleton()
 
     productos = Oferta.objects.all()[:5]
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems, 'productos': productos, 'singleton': singleton}
+    if request.user.is_authenticated:
+            
+        singleton = querySingleton()
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'productos': productos, 'singleton': singleton}
+    
+    else:
+        
+        context = {'items': items, 'order': order, 'cartItems': cartItems, 'productos': productos}
+
     return render(request, 'caliza/promos.html', context)  
 
 def masVendidos(request):
@@ -273,9 +318,16 @@ def masVendidos(request):
     order = data['order']
     items = data['items']
     products = Product.objects.all()[:10]
-    singleton = querySingleton()
+    
+    if request.user.is_authenticated:
+            
+        singleton = querySingleton()
+        context = {'items': items, 'order': order, 'cartItems': cartItems,'products': products, 'singleton': singleton}
+    
+    else:
+        
+        context = {'items': items, 'order': order, 'cartItems': cartItems,'products': products}
 
-    context = {'items': items, 'order': order, 'cartItems': cartItems,'products': products, 'singleton': singleton}
     return render(request, 'caliza/masVendidos.html', context) 
 
 def updateItem(request):
