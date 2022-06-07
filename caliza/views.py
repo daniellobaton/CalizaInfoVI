@@ -49,7 +49,7 @@ def store(request):
     return render(request, 'caliza/store.html', context)
 
 def userProfile(request):
-    
+        
     if request.method == "POST":
         userForm = UserUpdateForm(request.POST, instance=request.user)
         
@@ -61,7 +61,15 @@ def userProfile(request):
         
         userForm = UserUpdateForm()
     
-    context = {'userForm': userForm}
+    if request.user.is_authenticated:
+        
+        singleton = querySingleton()
+        context = {'userForm': userForm, 'singleton': singleton}
+    
+    else:
+        
+        context = {'userForm': userForm}
+        
     return render(request, 'caliza/userProfile.html', context)
 
 def querySingleton():
