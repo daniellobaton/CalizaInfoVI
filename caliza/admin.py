@@ -9,3 +9,8 @@ admin.site.register(Order)
 admin.site.register(OrderItem)
 admin.site.register(ShippingAddress)
 admin.site.register(GetProducts)
+admin.site.register(Oferta)
+
+@admin.register(Settings)
+class SettingsAdmin(admin.ModelAdmin):
+    pass

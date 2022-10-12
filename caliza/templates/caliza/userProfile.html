@@ -1,0 +1,26 @@
+{% extends 'caliza/index.html' %}
+{% load static %}
+{% block content %}
+<div class="row mt-5 justify-content-md-center">
+    <div class="col-4">
+        <form action="{% url 'userProfile' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    <img src="{% static 'img/user.png' %}">
+                </span>
+                <input type="text" name="username" class="form-control" id="exampleInputUser" aria-describedby="userHelp" placeholder="Nombre de usuario">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">
+                    <img src="{% static 'img/email24.webp' %}">
+                </span>
+                <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correo">
+            </div>
+            <div class="d-grid gap-2 mx-auto">
+                <button type="submit" class="btn btn-primary">Actualizar</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock content %}

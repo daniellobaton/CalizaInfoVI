@@ -2,29 +2,57 @@ import email
 import pytest
 from caliza.models import *
 
+####Creación producto con precio negativo
 @pytest.mark.django_db
-def test_product_creation():
-	
+def test_precio_negativo():
     producto = Product.objects.create(
 
         name = '',
-        price = 5.7,
-        digital = True,  
+        price = -5,
+        imageURL = ''
     )
+    assert producto != None
 
-    assert producto.name != '' and producto.price <= 50000 and producto.price > 0
+####Creación producto sin imageURL
+@pytest.mark.django_db
+def test_imagen_no_url():
+    producto = Product.objects.create(
+
+        name = '',
+        price = -5
+
+    )
+    assert producto != None
+
+####Orden sin customer
+@pytest.mark.django_db
+def test_creacion_orden():
+    order, created = Order.objects.get_or_create(complete = False)
+    assert order != None
+
+####Variable get incorrecta en producto individual o en promociones
+@pytest.mark.django_db
+def test_get_method():
+    producto = Product.objects.get(id = 'x')
+    assert producto != None
 
 @pytest.mark.django_db
 def test_address_creation():
+    customer = Customer.objects.create(
+                user = User.objects.create(),
+                name = '',
+                email = '',
+            )
+
     direccion = ShippingAddress.objects.create(
-            customer = Customer.objects.create(),
+            customer = customer,
             order = Order.objects.create(),
             address = '',
-            city = '',
+            city = '',  
             state = '',
             zipCode = '',
         )
-    assert direccion.customer != None and direccion.order != None and direccion.address != '' and direccion.city != '' and direccion.state != '' and direccion.zipCode != ''
+    assert direccion != None
 
 @pytest.mark.django_db
 def test_customer_creation():
@@ -34,11 +62,6 @@ def test_customer_creation():
             email = '',
         )
     assert customer.user != None and customer.name != '' and customer.email != ''
-
-
-
-
-
 
 @pytest.mark.django_db
 def test_product_creation2():

@@ -57,11 +57,11 @@
             <h3 class="fw-bold"> Precio </h3>
             <div class="form-check">
                 <input class="form-check-input" id="rbMayor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2" checked>
-                <label class="form-check-label"  for="exampleRadios2"> Mayor a $100 </label>
+                <label class="form-check-label"  for="exampleRadios2"> Mayor o igual a $100 </label>
             </div>
             <div class="form-check mb-5">
                 <input class="form-check-input" id="rbMenor" type="radio" name="exampleRadios2" id="exampleRadios2" value="option2">
-                <label class="form-check-label" for="exampleRadios2"> Menor a $100 </label>
+                <label class="form-check-label" for="exampleRadios2"> Menor o igual a $100 </label>
             </div>
              <!-- <h3 class="fw-bold"> Calificación </h3>
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-star-fill" viewBox="0 0 16 16">
@@ -89,6 +89,11 @@
                     <img src="{{product.imageURL}}" class="img-fluid thumbnail">
                     <div class="box-element product">
                         <h5><strong>{{product.name}}</strong></h5>
+                        {% if singleton %}
+                            <a class="btn update-wish-list" data-productwishlist={{product.id}} data-actionwishlist="addWishList">
+                                <img id="cart-icon" src="{% static 'img/like.webp' %}">
+                            </a>
+                        {% endif %}
                         <h5 style="display: none;" class="categoria">{{product.categoria}}</h5>
                         <hr>
                         <h5 class="precio">${{product.price}}</h5>

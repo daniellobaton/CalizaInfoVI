@@ -32,7 +32,9 @@
                     </svg>
                 </div>
                 <div>
-                    <i id="cart-icon" class="fas fa-heart"></i>
+                    {% comment %} <a class="btn update-wish-list" data-productwishlist={{product.id}} data-actionwishlist="addWishList">
+                        <img id="cart-icon" src="{% static 'img/like.webp' %}">
+                    </a> {% endcomment %}
                     <a>
                         <img  id="cart-icon" data-product={{producto.id}} data-action="add" class="add-btn update-cart" src="{% static 'img/cart.webp' %}">
                     </a>
@@ -60,7 +62,7 @@
     <div class="row mt-5 mx-4 p-5">
         <div class="d-grid gap-2 d-md-flex justify-content-between mb-5">
             <h4>Comentarios</h4>
-            <button type="button" class="btn btn-outline-primary">Dejar un comentario</button>
+            {% comment %} <button type="button" class="btn btn-outline-primary">Dejar un comentario</button> {% endcomment %}
         </div>
         <div class="col">
             <img src="../../../static/img/product-6.webp" class="image-perfil mx-auto d-block" alt="...">

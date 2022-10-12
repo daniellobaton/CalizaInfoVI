@@ -103,7 +103,7 @@
         </ul>
         
         <div class="form-inline my-2 my-lg-0">
-          {% if user %}
+          {% if singleton %}
             <div class="d-flex">
             <a href="{% url 'wishList' %}">
               <img  id="cart-icon" src="{% static 'img/like.webp' %}">
@@ -113,10 +113,10 @@
                 <img src="{% static 'img/user.png' %}">
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><h5 class="dropdown-item">{{user}}</h5></li>
+                <li><a class="dropdown-item" href="{% url 'userProfile' %}">Configuración</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li><a class="dropdown-item" href="{% url 'logoutUser' %}">Cerrar sesión</a></li>
               </ul>
             </li>
             {% comment %} <p>{{user.email}}</p> {% endcomment %}

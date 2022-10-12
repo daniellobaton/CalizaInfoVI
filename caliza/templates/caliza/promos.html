@@ -17,5 +17,43 @@
 
     </script>
 
+    <div class="row mt-5 justify-content-center" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col-6 d-flex justify-content-center">
+            <img class="img-fluid img-thumbnail" src="{% static 'img/bannerOferta.webp' %}" alt="">
+        </div>
+    </div>
+
+    <div class="row my-5 justify-content-center" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col">
+                <h2 class="text-center">Oferta del día</h2>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-4 d-flex justify-content-center">
+                <img src="{% static 'img/descuentoElectro.webp' %}" alt="" class="img-fluid img-thumbnail">
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5 justify-content-center" style="margin-left: 0px; margin-right: 0px;">
+        <div class="col">
+                <h2 class="text-center">Todas las ofertas</h2>
+        </div>
+        <div class="row d-flex justify-content-center gap-2">
+
+            {% for producto in productos %}
+            <div class="col-3">
+                <img src="{{producto.product.imageURL}}" alt="" class="img-fluid">
+                <div class="box-element product">
+                    <div class="d-flex justify-content-between">
+                        <h6><strong>{{producto.product.name}}</strong></h6>
+                        <h6 class="tachado"><strong>{{producto.product.price}}</strong></h6>
+                        <h6>{{producto.precioDescuento}}</h6>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
 
 {% endblock content %}
